@@ -1,0 +1,13 @@
+CREATE TABLE Students (student_id int NOT NULL, last_name varchar(255) NOT NULL,
+first_name varchar(255), enroll_date varchar(255), PRIMARY KEY (student_id));
+
+INSERT INTO Students (student_id, last_name, first_name, enroll_date)
+VALUES (10821, 'Spencer', 'Shawn', 2022-02-14);
+INSERT INTO Students (student_id, last_name, first_name, enroll_date)
+VALUES (10822, 'Guster', 'Burton', 2022-02-14);
+INSERT INTO Students (student_id, last_name, first_name, enroll_date)
+VALUES (10823, 'O Hara', 'Juliet', 2022-02-14);
+INSERT INTO Students (student_id, last_name, first_name, enroll_date)
+VALUES (10824, 'Lassiter', 'Carlton', 2022-02-14);
+INSERT INTO Students (student_id, last_name, first_name, enroll_date)
+VALUES (10825, 'Spencer', 'Henry', 2022-02-14);
