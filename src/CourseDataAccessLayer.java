@@ -1,27 +1,14 @@
 import java.sql.*;
 
-public class CourseDataAccessLayer {
-    public ResultSet res;
+public class CourseDataAccessLayer extends DataAccessLayer {
 
-    public CourseDataAccessLayer(int courseId) throws SQLException {
-        DatabaseConnection db = DatabaseConnection.getInstance();
-        Connection conn = db.dbConnection;
 
-        String stmt = "SELECT * FROM students WHERE course_id = ?";
-        PreparedStatement pst = conn.prepareStatement(stmt);
-        pst.setString(1,String.valueOf(courseId));
-        res = pst.executeQuery();
-        res.next(); //moves cursor to row with data
+    public CourseDataAccessLayer(int keyID) throws SQLException {
+        super("courses", "course_id", keyID);
     }
 
-    public String getLastName(){
-        try {
-            return res.getString("last_name");
-        }
-        catch (SQLException e){
-            System.out.println("Unable to find last name for student.");
-            return null;
-        }
+    public Boolean getInstructorPermissionStatus(){
+        return super.booleanConverter(super.getItem("instructor_permission"));
     }
 
 }

@@ -23,8 +23,8 @@ public class StudentDataAccessLayer extends DataAccessLayer{
         return super.getItem("enroll_date");
     }
 
-    public String getHoldStatus(){
-        return super.getItem("isHold");
+    public Boolean getHoldStatus(){
+        return super.booleanConverter(super.getItem("isHold"));
     }
 
 
