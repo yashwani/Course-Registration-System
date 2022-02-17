@@ -1,11 +1,10 @@
+import java.sql.*;
+
 public class Driver {
-    public static void main(String[] args) {
-        System.out.println("Hello World");
+    public static void main(String[] args) throws SQLException {
 
-        DatabaseConnection d = DatabaseConnection.getInstance();
-        DatabaseConnection e = DatabaseConnection.getInstance();
+        StudentDataAccessLayer studentdb = new StudentDataAccessLayer(10821);
+        System.out.println(studentdb.getLastName());
 
-        System.out.println(d);
-        System.out.println(e);
     }
 }
