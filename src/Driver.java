@@ -6,12 +6,12 @@ public class Driver {
 //        StudentDataAccessLayer studentdb = new StudentDataAccessLayer(10821);
 //        System.out.println(studentdb.getLastName());
 
-//        Student x = new Student(10824);
-//        System.out.println(x.getFirstName());
+        Student x = new Student(10824);
+        System.out.println(x.getFirstName());
 //        x.addCourse(10000);
 
-        AddCourseHandler chain = new HoldHandler();
-        System.out.println(chain.check(10823, 10000));
+//        AddCourseHandler chain = new HoldHandler();
+//        System.out.println(chain.check(10823, 10000));
 
 
     }

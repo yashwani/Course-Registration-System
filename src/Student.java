@@ -21,22 +21,23 @@ public class Student {
         try {
             studentdb = new StudentDataAccessLayer(studentId);
         } catch (SQLException e){
+            System.out.println("Error in student constructor");
             System.out.println(e.getMessage());
         }
 
     }
 
-    public String addCourse(int courseID){
-        /**
-         * Client for chain of responsibility consisting of handlers for: holds, instructor permission, database insertion
-         */
-
-        AddCourseHandler chain = new HoldHandler();
-        System.out.println(chain.check(studentId, courseID));
-
-
-        return "Enrolled in " + String.valueOf(courseID);
-    }
+//    public String addCourse(int courseID){
+//        /**
+//         * Client for chain of responsibility consisting of handlers for: holds, instructor permission, database insertion
+//         */
+//
+//        AddCourseHandler chain = new HoldHandler();
+//        System.out.println(chain.check(studentId, courseID));
+//
+//
+//        return "Enrolled in " + String.valueOf(courseID);
+//    }
 
     public int getStudentId() {
         return studentId;

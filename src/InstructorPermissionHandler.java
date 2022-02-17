@@ -1,10 +1,6 @@
 //import java.sql.SQLException;
 //
-//public class HoldHandler extends AddCourseHandler{
-//    /**
-//     * checks for holds against the student database
-//     */
-//
+//public class InstructorPermissionHandler extends AddCourseHandler{
 //
 //    private StudentDataAccessLayer studentdb;
 //    @Override
@@ -12,8 +8,8 @@
 //        Boolean holdStatus = true;
 //
 //        try{
-//         studentdb = new StudentDataAccessLayer(student_id);
-//         holdStatus = studentdb.getHoldStatus();
+//            studentdb = new StudentDataAccessLayer(student_id);
+//            holdStatus = studentdb.getHoldStatus();
 //        } catch (SQLException e){
 //            System.out.println(e.getMessage());
 //        }
