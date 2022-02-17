@@ -51,6 +51,17 @@ public class StudentDataAccessLayer {
         }
     }
 
+    public boolean getHoldStatus(){
+        try {
+            return res.getBoolean("isHold");
+        }
+        catch (SQLException e){
+            System.out.println("Unable to find enrollment date for student.");
+            System.exit(1);
+            return false;
+        }
+    }
+
 
 
 
