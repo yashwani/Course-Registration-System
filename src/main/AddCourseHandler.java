@@ -1,3 +1,5 @@
+package main;
+
 public abstract class AddCourseHandler {
     /**
      * abstract class that individual handlers extend when adding a course

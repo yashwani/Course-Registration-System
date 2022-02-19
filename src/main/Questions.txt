@@ -1,0 +1,34 @@
+General structure:
+3) Alan Sun OH: how to write good tests, what are we testing, how does tests work in java
+4) can two different bounded contexts share a database?
+-I have a registration database with course_id and associated student_id
+-each of these rows would ideally have a grade associated. This would remove the need to replicate the database in the faculty bounded context
+
+
+1)
+when student logs in, a student object is created by a student entity class, holds all information for a given student
+any manipulations to student (like adding class etc) will eventually find its way back to student
+how should updates to database work, controlled through student?
+maybe whenever setters are called in student, student automatically updates the database (last line of setter)
+
+maybe UpdateStudent class that manages updates to student data in the database, will also update the student class in memory
+
+
+2)
+how to interface with the database for getting student information / faculty information etc?
+
+
+
+-want to offload registration to another class
+    - dont want to burden student with knowledge of "how" to register
+-anytime student needs
+
+Data Access Layer / Data Access Controller pattern for StudentDataAccessLayer
+
+
+--------------------------------------------------------------------------------------------------------------------
+Details about functionality:
+- registrar can remove holds for a student
+
+
+

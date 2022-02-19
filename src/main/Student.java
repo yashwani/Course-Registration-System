@@ -1,3 +1,4 @@
+package main;
 import java.sql.SQLException;
 
 public class Student {
@@ -27,7 +28,7 @@ public class Student {
 
     }
 
-    public String addCourse(int courseID){
+    public String requestAddCourse(int courseID){
         /**
          * Client for chain of responsibility consisting of handlers for: holds, instructor permission, database insertion
          */

@@ -1,3 +1,4 @@
+package main;
 import java.sql.SQLException;
 
 public class InstructorPermissionHandler extends AddCourseHandler{

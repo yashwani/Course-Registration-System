@@ -1,3 +1,4 @@
+package main;
 import java.sql.*;
 
 public class CourseDataAccessLayer extends DataAccessLayer {
