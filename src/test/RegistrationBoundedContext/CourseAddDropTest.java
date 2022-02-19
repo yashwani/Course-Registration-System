@@ -1,7 +1,7 @@
-package test;
+package test.RegistrationBoundedContext;
 
-import main.CourseAddDrop;
-import main.RequestResponse;
+import main.RegistrationBoundedContext.CourseAddDrop;
+import main.RegistrationBoundedContext.RequestResponse;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

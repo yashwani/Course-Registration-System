@@ -1,7 +1,9 @@
-package main;
+package main.StudentBoundedContext;
+import main.db.DataAccessLayer;
+
 import java.sql.*;
 
-public class StudentDataAccessLayer extends DataAccessLayer{
+public class StudentDataAccessLayer extends DataAccessLayer {
     /**
      * Provides an abstraction layer between the database and the Student class
      * If switching databases, update code in this class

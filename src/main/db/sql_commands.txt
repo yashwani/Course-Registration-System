@@ -24,7 +24,21 @@ INSERT INTO Courses (course_id, course_name, isOpen, instructor, instructor_perm
 
 
 CREATE TABLE Courses_Students (course_id int NOT NULL, course_name varchar(255) NOT NULL,
-student_id int NOT NULL, permission_recieved boolean NOT NULL DEFAULT 0 , student_status varchar(255) NOT NULL);
+student_id int NOT NULL, permission_recieved boolean NOT NULL DEFAULT 0 , student_status varchar(255) NOT NULL, PRIMARY KEY(course_id, student_id));
 
 INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10000, 'Cloud Computing', 10821, 'Enrolled');
 INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10000, 'Cloud Computing', 10823, 'Enrolled');
+
+
+CREATE TABLE Course_Permission (course_id int NOT NULL, student_id int NOT NULL, status varchar(255) NOT NULL, PRIMARY KEY())
+
+
+
+
+
+
+
+
+
+
+

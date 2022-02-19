@@ -1,6 +1,6 @@
-package test;
+package test.StudentBoundedContext;
 
-import main.Student;
+import main.StudentBoundedContext.Student;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,4 +1,6 @@
-package main;
+package main.RegistrationBoundedContext;
+
+import main.StudentBoundedContext.StudentDataAccessLayer;
 
 import java.sql.SQLException;
 

@@ -1,5 +1,7 @@
 package main;
 
+import main.StudentBoundedContext.Student;
+
 import java.sql.*;
 
 public class Driver {

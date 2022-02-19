@@ -1,4 +1,5 @@
-package main;
+package main.StudentBoundedContext;
+
 import java.sql.SQLException;
 
 public class Student {

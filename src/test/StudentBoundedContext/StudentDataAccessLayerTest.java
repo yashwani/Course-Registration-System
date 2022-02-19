@@ -1,6 +1,6 @@
-package test;
+package test.StudentBoundedContext;
 
-import main.StudentDataAccessLayer;
+import main.StudentBoundedContext.StudentDataAccessLayer;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;

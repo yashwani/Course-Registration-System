@@ -1,4 +1,4 @@
-package main;
+package main.RegistrationBoundedContext;
 
 import java.util.Objects;
 

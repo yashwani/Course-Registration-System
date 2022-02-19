@@ -1,6 +1,7 @@
-package main;
+package main.RegistrationBoundedContext;
 
-import java.sql.SQLException;
+import main.RegistrationBoundedContext.CourseAddDrop;
+import main.RegistrationBoundedContext.RequestResponse;
 
 public class StudentRegistration {
     /**

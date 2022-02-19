@@ -1,4 +1,6 @@
-package main;
+package main.CoursesBoundedContext;
+import main.db.DataAccessLayer;
+
 import java.sql.*;
 
 public class CourseDataAccessLayer extends DataAccessLayer {
