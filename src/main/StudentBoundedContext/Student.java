@@ -33,6 +33,7 @@ public class Student {
         /**
          *
          */
+        //calls addCours in StudentRegistration
 
 
 

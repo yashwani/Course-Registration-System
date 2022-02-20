@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS Students;
+
 CREATE TABLE Students (student_id int NOT NULL, last_name varchar(255) NOT NULL,
 first_name varchar(255), enroll_date varchar(255), isHold boolean, PRIMARY KEY (student_id));
 
@@ -12,8 +14,8 @@ VALUES (10824, 'Lassiter', 'Carlton', 2022-02-14, 1);
 INSERT INTO Students (student_id, last_name, first_name, enroll_date, isHold)
 VALUES (10825, 'Spencer', 'Henry', 2022-02-14, 0);
 
------------------------------------------------------------------------------------------------------------------------
 
+DROP TABLE IF EXISTS Courses;
 CREATE TABLE Courses (course_id int NOT NULL, course_name varchar(255) NOT NULL,
 isOpen boolean NOT NULL, instructor varchar(255) NOT NULL, instructor_permission boolean NOT NULL,
 prereq1_id int, prereq2_id int, prereq3_id int, PRIMARY KEY (course_id));
@@ -25,16 +27,16 @@ INSERT INTO Courses (course_id, course_name, isOpen, instructor, instructor_perm
 INSERT INTO Courses (course_id, course_name, isOpen, instructor, instructor_permission) VALUES (10004, 'Java Programming', 1, 'Billy Bob', 1);
 
 
------------------------------------------------------------------------------------------------------------------------
 
+DROP TABLE IF EXISTS Courses_Students;
 CREATE TABLE Courses_Students (course_id int NOT NULL, course_name varchar(255) NOT NULL,
 student_id int NOT NULL, permission_recieved boolean NOT NULL DEFAULT 0 , student_status varchar(255) NOT NULL, PRIMARY KEY(course_id, student_id));
 
 INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10000, 'Cloud Computing', 10821, 'Enrolled');
 INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10000, 'Cloud Computing', 10823, 'Enrolled');
 
-------------------------------------------------------------------------------------------------------------------------
 
+DROP TABLE IF EXISTS Course_Permission;
 CREATE TABLE Course_Permission (course_id int NOT NULL, student_id int NOT NULL, status varchar(255) NOT NULL, PRIMARY KEY(course_id,student_id));
 
 INSERT INTO Course_Permission(course_id, student_id, status) VALUES (10002, 10825, 'GRANTED');
@@ -45,8 +47,8 @@ INSERT INTO Course_Permission(course_id, student_id, status) VALUES (10002, 1082
 INSERT INTO Course_Permission(course_id, student_id, status) VALUES (10002, 10822, 'PENDING');
 
 
-------------------------------------------------------------------------------------------------------------------------
 
+DROP TABLE IF EXISTS Previous_Courses;
 CREATE TABLE Previous_Courses(student_id int NOT NULL, course_id int NOT NULL, PRIMARY KEY (student_id, course_id));
 
 INSERT INTO Previous_Courses(student_id, course_id) VALUES(10825, 10001);

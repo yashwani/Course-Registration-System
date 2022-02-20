@@ -4,6 +4,8 @@ General structure:
 -I have a registration database with course_id and associated student_id
 -each of these rows would ideally have a grade associated. This would remove the need to replicate the database in the faculty bounded context
 
+-keep grades and registration independent
+
 
 1)
 when student logs in, a student object is created by a student entity class, holds all information for a given student
