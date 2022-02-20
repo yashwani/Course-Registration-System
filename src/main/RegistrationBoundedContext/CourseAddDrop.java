@@ -1,15 +1,28 @@
 package main.RegistrationBoundedContext;
 
+import main.CoursesBoundedContext.Course;
+import main.CoursesBoundedContext.PrevCourseDataAccessLayer;
+import main.StudentBoundedContext.Student;
 import main.StudentBoundedContext.StudentDataAccessLayer;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class CourseAddDrop {
-    public StudentDataAccessLayer studentdb;
 
-    public CourseAddDrop(int studentId, int courseId){
+    public StudentDataAccessLayer studentdb;
+    private Student student;
+    private Course course;
+    private int courseId;
+
+
+    public CourseAddDrop(Student student, Course course){
+        this.student = student;
+        this.courseId = course.getId();
+        this.course = course;
         try {
-            studentdb = new StudentDataAccessLayer(studentId);
+            studentdb = new StudentDataAccessLayer(this.student.getId());
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }
@@ -46,19 +59,46 @@ public class CourseAddDrop {
     }
 
     private boolean hold(){
-//        return true;
         return studentdb.getHoldStatus();
     }
 
     private boolean instructorPermission(){
-        //returns true if instructor permission not required OR instructor permission granted
-        //returns false if instructor permission required and not granted
+        //returns true if permission granted or no permission found
+        PermissionsDataAccessLayer p = new PermissionsDataAccessLayer(student.getId(),courseId);
+        String permission = p.getPermissions();
+        return permission.equals("Granted") || permission.equals("PERMISSION NOT FOUND");
 
-        return true; //TODO
     }
 
     private boolean prereqSatisfy(){
-        return true; //TODO
+        PrevCourseDataAccessLayer p = new PrevCourseDataAccessLayer(student.getId());
+        ArrayList<Integer> prevCourses = p.getPreviousCourses();
+        ArrayList<Integer> prerequisites = course.getPrerequisites();
+
+        //first check if there are prereqs, if there aren't then return True
+        boolean noPrereq = true;
+        for (int i = 0; i < prerequisites.size(); i++) {
+            noPrereq = noPrereq && (prerequisites.get(i) == null);
+        }
+        if (noPrereq){
+            return true;
+        }
+
+        boolean result = true;
+
+        for (int i = 0; i < prerequisites.size(); i++) {
+            boolean innerResult = false;
+            if (prerequisites.get(i) == null){ //if not prereq, then skip check
+                continue;
+            }
+            for (int j = 0; j<prevCourses.size(); j++){ //loop over prev courses to see if there's a match
+                innerResult = innerResult || (Objects.equals(prevCourses.get(j), prerequisites.get(i)));
+            }
+            System.out.println(innerResult);
+            result = result && innerResult;
+        }
+
+        return result;
     }
 
 

@@ -31,17 +31,15 @@ public class Student {
 
     public String requestAddCourse(int courseID){
         /**
-         * Client for chain of responsibility consisting of handlers for: holds, instructor permission, database insertion
+         *
          */
 
-        AddCourseHandler chain = new HoldHandler();
-        System.out.println(chain.check(studentId, courseID));
 
 
-        return "Enrolled in " + String.valueOf(courseID);
+        return null;
     }
 
-    public int getStudentId() {
+    public int getId() {
         return studentId;
     }
     public String getLastName() {

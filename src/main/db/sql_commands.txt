@@ -12,6 +12,7 @@ VALUES (10824, 'Lassiter', 'Carlton', 2022-02-14, 1);
 INSERT INTO Students (student_id, last_name, first_name, enroll_date, isHold)
 VALUES (10825, 'Spencer', 'Henry', 2022-02-14, 0);
 
+-----------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE Courses (course_id int NOT NULL, course_name varchar(255) NOT NULL,
 isOpen boolean NOT NULL, instructor varchar(255) NOT NULL, instructor_permission boolean NOT NULL,
@@ -21,7 +22,10 @@ INSERT INTO Courses (course_id, course_name, isOpen, instructor, instructor_perm
 INSERT INTO Courses (course_id, course_name, isOpen, instructor, instructor_permission) VALUES (10001, 'Distributed Systems', 1, 'Pierre Despereaux', 0);
 INSERT INTO Courses (course_id, course_name, isOpen, instructor, instructor_permission) VALUES (10002, 'Parallel Programming', 0, 'Marlow', 1);
 INSERT INTO Courses (course_id, course_name, isOpen, instructor, instructor_permission, prereq1_id, prereq3_id) VALUES (10003, 'Object Oriented Programming', 1, 'Zapato', 0, 10001, 10002);
+INSERT INTO Courses (course_id, course_name, isOpen, instructor, instructor_permission) VALUES (10004, 'Java Programming', 1, 'Billy Bob', 1);
 
+
+-----------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE Courses_Students (course_id int NOT NULL, course_name varchar(255) NOT NULL,
 student_id int NOT NULL, permission_recieved boolean NOT NULL DEFAULT 0 , student_status varchar(255) NOT NULL, PRIMARY KEY(course_id, student_id));
@@ -29,8 +33,27 @@ student_id int NOT NULL, permission_recieved boolean NOT NULL DEFAULT 0 , studen
 INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10000, 'Cloud Computing', 10821, 'Enrolled');
 INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10000, 'Cloud Computing', 10823, 'Enrolled');
 
+------------------------------------------------------------------------------------------------------------------------
 
-CREATE TABLE Course_Permission (course_id int NOT NULL, student_id int NOT NULL, status varchar(255) NOT NULL, PRIMARY KEY())
+CREATE TABLE Course_Permission (course_id int NOT NULL, student_id int NOT NULL, status varchar(255) NOT NULL, PRIMARY KEY(course_id,student_id));
+
+INSERT INTO Course_Permission(course_id, student_id, status) VALUES (10002, 10825, 'GRANTED');
+INSERT INTO Course_Permission(course_id, student_id, status) VALUES (10004, 10825, 'DENIED');
+INSERT INTO Course_Permission(course_id, student_id, status) VALUES (10002, 10823, 'DENIED');
+INSERT INTO Course_Permission(course_id, student_id, status) VALUES (10002, 10824, 'PENDING');
+INSERT INTO Course_Permission(course_id, student_id, status) VALUES (10002, 10821, 'PENDING');
+INSERT INTO Course_Permission(course_id, student_id, status) VALUES (10002, 10822, 'PENDING');
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+CREATE TABLE Previous_Courses(student_id int NOT NULL, course_id int NOT NULL, PRIMARY KEY (student_id, course_id));
+
+INSERT INTO Previous_Courses(student_id, course_id) VALUES(10825, 10001);
+INSERT INTO Previous_Courses(student_id, course_id) VALUES(10825, 10002);
+INSERT INTO Previous_Courses(student_id, course_id) VALUES(10824, 10001);
+INSERT INTO Previous_Courses(student_id, course_id) VALUES(10821, 10001);
+
 
 
 
