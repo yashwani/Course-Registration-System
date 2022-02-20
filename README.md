@@ -1,6 +1,6 @@
 # Course-Registration-System
 
-## Setting up Database
+## Setting up the REGIE Database
 1. Log into MySQL through command line filling in appropriate username and password fields: $ mysql -u 'username' -p 'password'
 2. Enter password
 3. Create a database named REGIE: mysql> CREATE DATABASE regie;
