@@ -2,6 +2,8 @@ package main.db;
 import java.sql.*;
 import java.util.ArrayList;
 
+//TODO: condense code by creating methods
+
 public class DataAccessLayer {
 
     public ResultSet res;
@@ -32,7 +34,58 @@ public class DataAccessLayer {
             System.out.println("Error in connecting to database, or SQL Statement execution.");
         }
         return result;
+    }
 
+    public boolean executeUpdateQuery(String tableName, String[] updateColumn, String[] updateValue, String[] keyName, String[] keyID){
+        boolean result = true;
+        int row = 0;
+
+        try {
+            String stmt = buildUpdateStatement(tableName, updateColumn, updateValue, keyName, keyID);
+            PreparedStatement pst = conn.prepareStatement(stmt);
+            row = pst.executeUpdate();
+            System.out.println(row);
+        } catch (SQLException e){
+            result = false;
+        }
+
+        if (row == 0){ //if record does not exist, row gets set to 0
+            result = false;
+        }
+
+        return result;
+
+    }
+
+    public String buildUpdateStatement(String tableName, String[] updateColumn, String[] updateValue, String[] keyName, String[] keyID){
+        String stmt = "";
+
+        String updateClause = "UPDATE " + tableName;
+
+        String setClause = "SET";
+        String sep = ",";
+        for (int i = 0; i < updateColumn.length; i++) {
+            if (i == updateColumn.length-1){
+                sep = "";
+            }
+            setClause = setClause + " " + updateColumn[i] + "=" + updateValue[i] + sep;
+        }
+
+        String whereClause = "WHERE ";
+        sep = " AND ";
+
+        for (int i = 0; i < keyName.length; i++) {
+            if (i == keyName.length-1){
+                sep = "";
+            }
+            whereClause = whereClause + keyName[i] + " = " + keyID[i] + sep;
+
+        }
+
+        stmt = updateClause + " " + setClause + " " + whereClause;
+
+
+        return stmt;
     }
 
 

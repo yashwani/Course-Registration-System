@@ -19,4 +19,11 @@ class FacultyCourseDataAccessLayerTest {
         FacultyCourseDataAccessLayer f = new FacultyCourseDataAccessLayer(20000, -1);
         assertFalse(f.isTeachingCourse());
     }
+
+    @Test
+    void facultyDNE() {
+        FacultyCourseDataAccessLayer f = new FacultyCourseDataAccessLayer(-1, 10000);
+        assertFalse(f.isTeachingCourse());
+    }
+
 }

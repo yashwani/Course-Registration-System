@@ -9,6 +9,34 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class dataAccessLayerTest {
 
+
+    @Test
+    void executeUpdateQuery1(){
+        DataAccessLayer db = new DataAccessLayer();
+        String tableName = "grades";
+        String[] updateColumn = new String[]{"grade"};
+        String[] updateValue = new String[]{"'A'"};
+        String[] keyName = new String[]{"student_id", "course_id"};
+        String[] keyId = new String[]{"10821", "10000"};
+
+        boolean actual = db.executeUpdateQuery(tableName, updateColumn, updateValue, keyName, keyId);
+        assertTrue(actual);
+    }
+
+    @Test
+    void executeUpdateQueryRecordDNE(){
+        DataAccessLayer db = new DataAccessLayer();
+        String tableName = "grades";
+        String[] updateColumn = new String[]{"grade"};
+        String[] updateValue = new String[]{"'A'"};
+        String[] keyName = new String[]{"student_id", "course_id"};
+        String[] keyId = new String[]{"10821", "-1"};
+
+        boolean actual = db.executeUpdateQuery(tableName, updateColumn, updateValue, keyName, keyId);
+        assertFalse(actual);
+    }
+
+
     @Test
     void executeSelectQuery1(){
         DataAccessLayer db = new DataAccessLayer();
@@ -85,6 +113,23 @@ class dataAccessLayerTest {
     }
 
 // TESTS BELOW ARE FOR PRIVATE METHOD, MADE PUBLIC TEMPORARILY FOR TESTING
+//    @Test
+//    void buildUpdateStatement(){
+//        DataAccessLayer db = new DataAccessLayer();
+//        String tableName = "grades";
+//        String[] updateColumn = new String[]{"grade"};
+//        String[] updateValue = new String[]{"'E'"};
+//        String[] keyName = new String[]{"student_id", "course_id"};
+//        String[] keyId = new String[]{"10821", "10000"};
+//        String actual = db.buildUpdateStatement(tableName, updateColumn, updateValue, keyName, keyId);
+//        String expected = "UPDATE grades SET grade='E' WHERE student_id = 10821 AND course_id = 10000";
+//
+//        System.out.println(actual);
+//        System.out.println(expected);
+//
+//        assertEquals(expected, actual);
+//    }
+
 
 //    @Test
 //    void selectStatementBuilder(){
