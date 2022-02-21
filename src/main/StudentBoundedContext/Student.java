@@ -6,11 +6,6 @@ public class Student {
     /**
      * Entity class that holds all pertinent information regarding a specific student.
      *
-     * TODO: add getters and setters for other instance variables
-     * to add:
-     *      - previous courses
-     *      - courses currently registered for
-     *      - holds
      */
     private StudentDataAccessLayer studentdb;
     private int studentId;

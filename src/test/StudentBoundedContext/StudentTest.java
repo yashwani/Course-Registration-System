@@ -16,6 +16,6 @@ class StudentTest {
     @Test
     void testBadStudentId() {
         Student x = new Student(10000);
-        assertEquals(null,x.getFirstName());
+        assertEquals("Student not found.",x.getFirstName());
     }
 }

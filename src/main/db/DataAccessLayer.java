@@ -6,6 +6,11 @@ import java.util.ArrayList;
 
 public class DataAccessLayer {
 
+    /**
+     * A database access layer superclass that implements methods to select from/ update to/ insert into the database
+     */
+
+
     public ResultSet res;
     private Connection conn;
 

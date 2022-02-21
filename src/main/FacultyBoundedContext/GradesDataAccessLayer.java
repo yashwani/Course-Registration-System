@@ -7,6 +7,10 @@ import java.util.List;
 
 
 public class GradesDataAccessLayer extends DataAccessLayer {
+    /**
+     * Provides an abstraction layer to the grades table in the database
+     * If switching databases, update code in this class
+     */
 
     private String[] keyID = new String[2];
     private String tableName = "grades";

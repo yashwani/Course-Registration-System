@@ -1,7 +1,15 @@
 package main.FacultyBoundedContext;
 
 
+import main.AdminBoundedContext.FacultyCourseDataAccessLayer;
+
 public class Faculty {
+    /**
+     * Entity class that holds all pertinent information regarding a specific faculty member.
+     *
+     */
+
+
     private int facultyId;
     private String lastName;
     private String firstName;
@@ -13,12 +21,18 @@ public class Faculty {
     }
 
     public String assignGrade(int course_id, int student_id, String grade){
-        // cant assign bc not teaching that course
-        // cant assign bc student not in that course
-        // cant assign bc invalid grade type entered
 
-        //grade assigned successfully
-        return null;
+        FacultyCourseDataAccessLayer f = new FacultyCourseDataAccessLayer(facultyId, course_id);
+        if (!f.isTeachingCourse()){
+            return "Sorry, you cannot update a course that you do not teach.";
+        }
+
+        GradesDataAccessLayer g = new GradesDataAccessLayer(course_id, student_id);
+        if (!g.updateGrade(grade)){
+            return "Sorry, your grade update failed. Please ensure the student is in your course, and that you have entered a valid grade type";
+        }
+
+        return "Successfully assigned grade";
 
     }
 

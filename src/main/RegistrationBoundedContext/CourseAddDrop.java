@@ -10,6 +10,12 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class CourseAddDrop {
+    /**
+     * Handles all course adding (and soon dropping) functionality. Handles checking (holds/instructor permission/prereqs)
+     * for whether a student can add a course --> in future iterations, this may be abstracted out.
+     */
+
+
 
     public StudentDataAccessLayer studentdb;
     private Student student;

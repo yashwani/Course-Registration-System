@@ -5,6 +5,12 @@ import main.db.DataAccessLayer;
 import java.util.ArrayList;
 
 public class PrevCourseDataAccessLayer extends DataAccessLayer {
+    /**
+     * Provides an abstraction layer to the previous courses table in the database
+     * If switching databases, update code in this class
+     */
+
+
     private String tableName = "Previous_Courses";
     private String[] keyName = new String[]{"student_id"};
     private String[] keyID;

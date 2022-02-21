@@ -5,6 +5,10 @@ import main.db.DataAccessLayer;
 import java.util.ArrayList;
 
 public class FacultyDataAccessLayer extends DataAccessLayer {
+    /**
+     * Provides an abstraction layer to the faculty table in the database
+     * If switching databases, update code in this class
+     */
 
 
     private String[] keyID = new String[1];

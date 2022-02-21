@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class StudentDataAccessLayer extends DataAccessLayer {
     /**
-     * Provides an abstraction layer between the database and the Student class
+     * Provides an abstraction layer to the students table in the database
      * If switching databases, update code in this class
      */
     private String[] keyID = new String[1];

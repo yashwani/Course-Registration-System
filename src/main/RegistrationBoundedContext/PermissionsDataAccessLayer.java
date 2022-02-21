@@ -7,6 +7,12 @@ import java.util.ArrayList;
 //TODO: clean up inheritance from DataAccessLayer
 
 public class PermissionsDataAccessLayer extends DataAccessLayer {
+    /**
+     * Provides an abstraction layer to the course_permission table in the database
+     * If switching databases, update code in this class
+     */
+
+
     private String tableName = "Course_Permission";
     private String[] keyName = new String[]{"course_id", "student_id"};
     private String[] keyID;

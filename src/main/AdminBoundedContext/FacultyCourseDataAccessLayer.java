@@ -5,6 +5,10 @@ import main.db.DataAccessLayer;
 import java.util.ArrayList;
 
 public class FacultyCourseDataAccessLayer extends DataAccessLayer {
+    /**
+     * Provides an abstraction layer to the courses_faculty table in the database
+     * If switching databases, update code in this class
+     */
 
     private String tableName = "courses_faculty";
     private String[] keyName = new String[]{"course_id", "faculty_id"};

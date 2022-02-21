@@ -17,28 +17,26 @@ class FacultyTest {
     @Test
     void testAssignGrade2() {
         Faculty x = new Faculty(20000);
-        assertEquals("Course and/or student invalid",x.assignGrade(-1,10821,"A"));
+        assertEquals("Sorry, you cannot update a course that you do not teach.",x.assignGrade(-1,10821,"A"));
     }
 
     @Test
     void testAssignGrade3() {
         Faculty x = new Faculty(20000);
-        assertEquals("Course and/or student invalid",x.assignGrade(10000,-1,"A"));
+        assertEquals("Sorry, your grade update failed. Please ensure the student is in your course, and that you have entered a valid grade type",x.assignGrade(10000,-1,"A"));
     }
 
     @Test
     void testAssignGrade4() {
         Faculty x = new Faculty(20000);
-        assertEquals("Course and/or student invalid",x.assignGrade(-1,-1,"A"));
+        assertEquals("Sorry, you cannot update a course that you do not teach.",x.assignGrade(-1,-1,"A"));
     }
 
     @Test
     void testAssignGrade5() {
         Faculty x = new Faculty(20000);
-        assertEquals("Invalid grade type entered",x.assignGrade(-1,-1,"E"));
+        assertEquals("Sorry, you cannot update a course that you do not teach.",x.assignGrade(-1,-1,"E"));
     }
-
-
 
 
     @Test
