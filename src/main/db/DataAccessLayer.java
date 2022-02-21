@@ -57,7 +57,7 @@ public class DataAccessLayer {
 
     }
 
-    public String buildUpdateStatement(String tableName, String[] updateColumn, String[] updateValue, String[] keyName, String[] keyID){
+    private String buildUpdateStatement(String tableName, String[] updateColumn, String[] updateValue, String[] keyName, String[] keyID){
         String stmt = "";
 
         String updateClause = "UPDATE " + tableName;
@@ -121,7 +121,7 @@ public class DataAccessLayer {
 
     protected boolean booleanConverter(String val){
         /**
-         * JDBC driver reads false as "0"
+         * JDBC driver reads false as "0 from MySQL"
          */
 
         if (val.equals("0")){
