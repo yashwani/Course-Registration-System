@@ -2,31 +2,56 @@ package main.StudentBoundedContext;
 import main.db.DataAccessLayer;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class StudentDataAccessLayer extends DataAccessLayer {
     /**
      * Provides an abstraction layer between the database and the Student class
      * If switching databases, update code in this class
      */
+    private String[] keyID = new String[1];
+    private String tableName = "students";
+    private String[] keyName = new String[]{"student_id"};
+
 
     public StudentDataAccessLayer(int keyID) throws SQLException {
-        super("students", "student_id", keyID);
+        super();
+        this.keyID[0] = String.valueOf(keyID);
     }
 
     public String getLastName(){
-        return super.getItem("last_name");
+        String[] col = new String[]{"last_name"};
+        return getResult(col);
     }
 
     public String getFirstName(){
-        return super.getItem("first_name");
+        String[] col = new String[]{"first_name"};
+        return getResult(col);
     }
 
     public String getEnrollDate(){
-        return super.getItem("enroll_date");
+        String[] col = new String[]{"enroll_date"};
+        return getResult(col);
     }
 
     public Boolean getHoldStatus(){
-        return super.booleanConverter(super.getItem("isHold"));
+
+        String[] col = new String[]{"isHold"};
+
+        String res = getResult(col);
+        if (res.equals("Student not found.")){
+            return false;
+        }
+
+        return super.booleanConverter(res);
+    }
+
+    private String getResult(String[] col){
+        ArrayList<ArrayList<String>> result = super.executeSelectQuery(col,tableName,keyName,keyID);
+        if (result.isEmpty() || result.get(0).isEmpty()){
+            return "Student not found.";
+        }
+        return result.get(0).get(0);
     }
 
 

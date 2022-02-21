@@ -1,32 +1,37 @@
 package main.CoursesBoundedContext;
 import main.db.DataAccessLayer;
 
-import java.sql.*;
 import java.util.ArrayList;
 
 public class CourseDataAccessLayer extends DataAccessLayer {
 
+    private String tableName = "courses";
+    private String[] keyName = new String[]{"course_id"};
+    private String[] keyID = new String[1];
 
     public CourseDataAccessLayer(int keyID) {
-        super("courses", "course_id", keyID);
+        super();
+
+        this.keyID[0] = String.valueOf(keyID);
     }
 
     public Boolean getInstructorPermissionStatus(){
-        return super.booleanConverter(super.getItem("instructor_permission"));
+//        return super.booleanConverter(super.getItem("instructor_permission"));
+        return null;
     }
 
     public ArrayList<Integer> getPrerequisites(){
-        ArrayList<Integer> prerequisites = new ArrayList<>();
-        for (int i = 1; i <= Course.MAX_NUM_PREREQ; i++) {
-            String temp = super.getItem("prereq" + String.valueOf(i) + "_id");
-            if (temp != null){
-                prerequisites.add(Integer.parseInt(temp));
-            } else{
-                prerequisites.add(null);
-            }
-        }
+        String[] columnsSelected = new String[]{"prereq1_id", "prereq2_id", "prereq3_id"};
+        ArrayList<ArrayList<String>> resultString = super.executeSelectQuery(columnsSelected, tableName, keyName, keyID);
 
-        return prerequisites;
+        ArrayList<Integer> result = new ArrayList<>();
+        for (int i = 0; i < resultString.get(0).size(); i++) {
+            if (resultString.get(0).get(i) == null){
+                continue;
+            }
+            result.add(Integer.valueOf(resultString.get(0).get(i)));
+        }
+        return result;
     }
 
 }

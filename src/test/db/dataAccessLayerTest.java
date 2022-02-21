@@ -1,17 +1,17 @@
 package test.db;
 
-import main.db.xDataAccessLayer;
+import main.db.DataAccessLayer;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class xDataAccessLayerTest {
+class dataAccessLayerTest {
 
     @Test
     void executeSelectQuery1(){
-        xDataAccessLayer db = new xDataAccessLayer();
+        DataAccessLayer db = new DataAccessLayer();
         String[] columnsSelected = new String[]{"last_name"};
         String tableName = "students";
         String[] keyName = new String[]{"student_id"};
@@ -32,7 +32,7 @@ class xDataAccessLayerTest {
 
     @Test
     void executeSelectQuery2(){
-        xDataAccessLayer db = new xDataAccessLayer();
+        DataAccessLayer db = new DataAccessLayer();
         String[] columnsSelected = new String[]{"prereq1_id", "prereq2_id", "prereq3_id"};
         String tableName = "courses";
         String[] keyName = new String[]{"course_id"};
@@ -44,6 +44,32 @@ class xDataAccessLayerTest {
         inner1.add("10001");
         inner1.add(null);
         inner1.add("10002");
+        expected.add(inner1);
+
+        assertEquals(expected, actual);
+
+        int arr = actual.size();
+        for (int i = 0; i < arr; i++) {
+            int edgeCount = actual.get(i).size();
+            for (int j = 0; j < edgeCount; j++) {
+                System.out.println(actual.get(i).get(j));
+            }
+        }
+
+    }
+
+    @Test
+    void executeSelectQuery3(){
+        DataAccessLayer db = new DataAccessLayer();
+        String[] columnsSelected = new String[]{"status"};
+        String tableName = "course_permission";
+        String[] keyName = new String[]{"course_id", "student_id"};
+        String[] keyId = new String[]{"10002", "10823"};
+        ArrayList<ArrayList<String>> actual = db.executeSelectQuery(columnsSelected, tableName, keyName, keyId);
+
+        ArrayList<ArrayList<String>> expected = new ArrayList<>();
+        ArrayList<String> inner1 = new ArrayList<>();
+        inner1.add("DENIED");
         expected.add(inner1);
 
         assertEquals(expected, actual);

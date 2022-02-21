@@ -21,7 +21,6 @@ class CourseDataAccessLayerTest {
         ArrayList<Integer> actual = c.getPrerequisites();
         ArrayList<Integer> expected = new ArrayList<>();
         expected.add(10001);
-        expected.add(null);
         expected.add(10002);
 
         assertTrue(actual.size() == expected.size());
@@ -36,9 +35,9 @@ class CourseDataAccessLayerTest {
         CourseDataAccessLayer c = new CourseDataAccessLayer(10002);
         ArrayList<Integer> actual = c.getPrerequisites();
         ArrayList<Integer> expected = new ArrayList<>();
-        expected.add(null);
-        expected.add(null);
-        expected.add(null);
+
+        assertEquals(expected, actual);
+
 
         assertTrue(actual.size() == expected.size());
 

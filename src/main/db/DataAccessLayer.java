@@ -5,46 +5,65 @@ import java.util.ArrayList;
 public class DataAccessLayer {
 
     public ResultSet res;
-    public String tableName;
+    private Connection conn;
 
-    public DataAccessLayer(String tableName, String keyName, int keyID )  {
-        try {
+    public DataAccessLayer( )  {
             DatabaseConnection db = DatabaseConnection.getInstance();
-            Connection conn = db.dbConnection;
+            conn = db.dbConnection;
+    }
 
-            this.tableName = tableName;
-
-            String stmt = "SELECT * FROM " + tableName + " WHERE " + keyName + " = ?";
+    public ArrayList<ArrayList<String>> executeSelectQuery(String[] columnsSelected, String tableName, String[] keyName, String[] keyID){
+        ArrayList<ArrayList<String>> result = new ArrayList<>();
+        try {
+            String stmt = buildSelectStatement(columnsSelected, tableName, keyName, keyID);
             PreparedStatement pst = conn.prepareStatement(stmt);
-            pst.setString(1, String.valueOf(keyID));
             res = pst.executeQuery();
-            res.next(); //moves cursor to row with data
-        } catch(SQLException e){
+
+            while(res.next()){
+                ArrayList<String> row = new ArrayList<>();
+
+                for (int i = 0; i < columnsSelected.length; i++) {
+                    row.add(res.getString(columnsSelected[i]));
+                }
+                result.add(row);
+            }
+
+        } catch (SQLException e){
             System.out.println("Error in connecting to database, or SQL Statement execution.");
         }
-    }
-
-    public String getItem(String columnLabel){
-        try {
-            return res.getString(columnLabel);
-        } catch (SQLException e){
-            System.out.println("Unable to find " + columnLabel + " for table " + tableName);
-            return null;
-        }
-    }
-
-    public ArrayList getItemList(String columnLabel){
-        ArrayList result = new ArrayList();
-        try{
-            result.add(res.getString(columnLabel));
-            while(res.next()){
-                result.add(res.getString(columnLabel));
-            }
-        } catch (SQLException e){
-            System.out.println("Unable to find " + columnLabel + " for table " + tableName);
-        }
-
         return result;
+
+    }
+
+
+    private String buildSelectStatement(String[] columnsSelected, String tableName, String[] keyName, String[] keyID){
+        String stmt = "";
+
+        String selectClause = "SELECT";
+        String sep = ",";
+        for (int i = 0; i < columnsSelected.length; i++) {
+            if (i == columnsSelected.length-1){
+                sep = "";
+            }
+            selectClause = selectClause + " " + columnsSelected[i] + sep;
+        }
+
+        String fromClause = "FROM " + tableName;
+
+        String whereClause = "WHERE ";
+        sep = " AND ";
+
+        for (int i = 0; i < keyName.length; i++) {
+            if (i == keyName.length-1){
+                sep = "";
+            }
+            whereClause = whereClause + keyName[i] + " = " + keyID[i] + sep;
+
+        }
+
+        stmt = selectClause + " " + fromClause + " " + whereClause;
+
+        return stmt;
     }
 
     protected boolean booleanConverter(String val){
@@ -63,12 +82,6 @@ public class DataAccessLayer {
         }
     }
 
-    protected ArrayList<Integer> stringArrayListToInt(ArrayList<String> input){
-        ArrayList<Integer> output = new ArrayList<>();
-        for(String stringValue : input) {
-            output.add(Integer.parseInt(stringValue));
-        }
-        return output;
-    }
+
 
 }
