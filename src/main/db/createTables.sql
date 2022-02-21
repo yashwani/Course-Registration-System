@@ -36,6 +36,32 @@ INSERT INTO Courses_Students(course_id, course_name, student_id, student_status)
 INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10000, 'Cloud Computing', 10823, 'Enrolled');
 
 
+
+
+DROP TABLE IF EXISTS Grades;
+CREATE TABLE Grades (course_id int NOT NULL, student_id int NOT NULL, grade varchar(255), PRIMARY KEY(course_id, student_id));
+
+INSERT INTO Grades(course_id, student_id) VALUES(10000, 10821);
+INSERT INTO Grades(course_id, student_id) VALUES(10000, 10823);
+
+
+
+DROP TABLE IF EXISTS Faculty;
+CREATE TABLE Faculty (faculty_id int NOT NULL, last_name varchar(255) NOT NULL, first_name varchar(255) NOT NULL, PRIMARY KEY(faculty_id));
+
+INSERT INTO FACULTY (faculty_id, last_name, first_name) VALUES (20000, 'Bob','Billy');
+INSERT INTO FACULTY (faculty_id, last_name, first_name) VALUES (20001, 'Johnson','Jim');
+
+
+
+DROP TABLE IF EXISTS Courses_Faculty;
+CREATE TABLE Courses_Faculty(course_id int NOT NULL, faculty_id int NOT NULL);
+
+INSERT INTO Courses_Faculty(course_id, faculty_id) VALUES (10000, 20000);
+INSERT INTO Courses_Faculty(course_id, faculty_id) VALUES (10001, 20001);
+
+
+
 DROP TABLE IF EXISTS Course_Permission;
 CREATE TABLE Course_Permission (course_id int NOT NULL, student_id int NOT NULL, status varchar(255) NOT NULL, PRIMARY KEY(course_id,student_id));
 
