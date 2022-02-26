@@ -9,6 +9,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class dataAccessLayerTest {
 
+    @Test
+    void executeDeleteQuery1(){
+        DataAccessLayer db = new DataAccessLayer();
+        String tableName = "students";
+        String[] keyName = new String[]{"student_id"};
+        String[] keyID = new String[]{"10829"};
+
+        boolean actual = db.executeDeleteQuery(tableName, keyName, keyID);
+        assertTrue(actual);
+    }
 
 
     @Test
@@ -126,7 +136,41 @@ class dataAccessLayerTest {
 
 
 
+
+
 // TESTS BELOW ARE FOR PRIVATE METHOD, MADE PUBLIC TEMPORARILY FOR TESTING
+
+//    @Test
+//    void buildDeleteStatement1(){
+//        DataAccessLayer db = new DataAccessLayer();
+//        String tableName = "students";
+//        String[] keyName = new String[]{"last_name", "first_name", "student_id"};
+//        String[] keyID = new String[]{"'Vayani'", "'Omar'", "10826"};
+//
+//        String actual = db.buildDeleteStatement(tableName, keyName, keyID);
+//        String expected = "DELETE FROM students WHERE last_name = 'Vayani' AND first_name = 'Omar' AND student_id = 10826";
+//
+//        System.out.println(actual);
+//        System.out.println(expected);
+//
+//        assertEquals(expected, actual);
+//    }
+//
+//    @Test
+//    void buildDeleteStatement2(){
+//        DataAccessLayer db = new DataAccessLayer();
+//        String tableName = "students";
+//        String[] keyName = new String[]{ "student_id"};
+//        String[] keyID = new String[]{"10826"};
+//
+//        String actual = db.buildDeleteStatement(tableName, keyName, keyID);
+//        String expected = "DELETE FROM students WHERE student_id = 10826";
+//
+//        System.out.println(actual);
+//        System.out.println(expected);
+//
+//        assertEquals(expected, actual);
+//    }
 
 //    @Test
 //    void buildInsertStatement(){

@@ -19,6 +19,23 @@ public class DataAccessLayer {
             conn = db.dbConnection;
     }
 
+    public boolean executeDeleteQuery(String tableName, String[] keyName, String[] keyID){
+        boolean result = true;
+        int row = 0;
+        try{
+            String stmt = buildDeleteStatement(tableName, keyName, keyID);
+            PreparedStatement pst = conn.prepareStatement(stmt);
+            row = pst.executeUpdate();
+            System.out.println(row);
+
+        } catch(SQLException e){
+            System.out.println("Error in connecting to database, or SQL Statement execution. ");
+            result = false;
+        }
+        return result;
+    }
+
+
     public boolean executeInsertQuery(String tableName, String[] insertColumn, String[] columnValue){
         boolean result = true;
         int row = 0;
@@ -84,7 +101,7 @@ public class DataAccessLayer {
 
     }
 
-    public String buildDeleteStatement(String tableName, String[] keyName, String[] keyID){
+    private String buildDeleteStatement(String tableName, String[] keyName, String[] keyID){
         String stmt;
 
         String deleteClause = "DELETE FROM " + tableName + " ";
