@@ -10,6 +10,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class dataAccessLayerTest {
 
 
+
+    @Test
+    void executeInsertQuery1(){
+        DataAccessLayer db = new DataAccessLayer();
+        String tableName = "students";
+        String[] insertColumn = new String[]{"student_id", "last_name", "first_name", "enroll_date", "isHold"};
+        String[] columnValue = new String[]{"10829", "'Umesh'", "'Nikhil'","2020", "0"};
+
+        boolean actual = db.executeInsertQuery(tableName, insertColumn, columnValue);
+        assertTrue(actual);
+    }
+
     @Test
     void executeUpdateQuery1(){
         DataAccessLayer db = new DataAccessLayer();
@@ -112,7 +124,29 @@ class dataAccessLayerTest {
 
     }
 
+
+
 // TESTS BELOW ARE FOR PRIVATE METHOD, MADE PUBLIC TEMPORARILY FOR TESTING
+
+//    @Test
+//    void buildInsertStatement(){
+//        DataAccessLayer db = new DataAccessLayer();
+//        String tableName = "students";
+//        String[] insertColumn = new String[]{"student_id", "last_name", "first_name", "enroll_date", "isHold"};
+//        String[] columnValue = new String[]{"10827", "'Vayani'", "'Omar'","2020", "0"};
+//
+//        String actual = db.buildInsertStatement(tableName, insertColumn, columnValue);
+//        String expected = "INSERT INTO students (student_id, last_name, first_name, enroll_date, isHold) VALUES (10827, 'Vayani', 'Omar', 2020, 0)";
+//
+//        System.out.println(actual);
+//        System.out.println(expected);
+//
+//        assertEquals(expected, actual);
+//    }
+
+
+
+
 //    @Test
 //    void buildUpdateStatement(){
 //        DataAccessLayer db = new DataAccessLayer();

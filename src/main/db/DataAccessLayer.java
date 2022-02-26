@@ -19,6 +19,28 @@ public class DataAccessLayer {
             conn = db.dbConnection;
     }
 
+    public boolean executeInsertQuery(String tableName, String[] insertColumn, String[] columnValue){
+        boolean result = true;
+        int row = 0;
+        try {
+            String stmt = buildInsertStatement(tableName, insertColumn, columnValue);
+            PreparedStatement pst = conn.prepareStatement(stmt);
+            row = pst.executeUpdate();
+            System.out.println(row);
+        } catch(SQLException e){
+            System.out.println("Error in connecting to database, or SQL Statement execution. ");
+            result = false;
+        }
+
+        if (row == 0){ //if record does not exist, row gets set to 0
+            result = false;
+        }
+
+        return result;
+
+    }
+
+
     public ArrayList<ArrayList<String>> executeSelectQuery(String[] columnsSelected, String tableName, String[] keyName, String[] keyID){
         ArrayList<ArrayList<String>> result = new ArrayList<>();
         try {
@@ -61,6 +83,63 @@ public class DataAccessLayer {
         return result;
 
     }
+
+    public String buildDeleteStatement(String tableName, String[] keyName, String[] keyID){
+        String stmt;
+
+        String deleteClause = "DELETE FROM " + tableName + " ";
+
+        String whereClause = "WHERE ";
+        String sep = " AND ";
+
+        for (int i = 0; i < keyName.length; i++) {
+            if (i == keyName.length-1){
+                sep = "";
+            }
+            whereClause = whereClause + keyName[i] + " = " + keyID[i] + sep;
+
+        }
+        stmt = deleteClause + whereClause;
+        return stmt;
+
+    }
+
+
+    private String buildInsertStatement(String tableName, String[] insertColumn, String[] columnValue){
+        String stmt = "";
+
+        String insertClause = "INSERT INTO " + tableName + " ";
+
+        String columnClause = "";
+        String sep = ", ";
+        for (int i = 0; i< insertColumn.length; i++ ){
+            if (i == insertColumn.length - 1){
+                sep = "";
+            }
+            columnClause = columnClause + insertColumn[i] + sep;
+        }
+        System.out.println(columnClause);
+
+        columnClause = "(" + columnClause + ")";
+        System.out.println(columnClause);
+
+        String valuesClause = " VALUES ";
+        String columnValues = "";
+        sep = ", ";
+        for (int i = 0; i< columnValue.length; i++ ){
+            if (i == columnValue.length - 1){
+                sep = "";
+            }
+            columnValues = columnValues + columnValue[i] + sep;
+        }
+        columnValues = '(' + columnValues + ')';
+
+        stmt = insertClause + columnClause + valuesClause + columnValues;
+        return stmt;
+
+    }
+
+
 
     private String buildUpdateStatement(String tableName, String[] updateColumn, String[] updateValue, String[] keyName, String[] keyID){
         String stmt = "";
