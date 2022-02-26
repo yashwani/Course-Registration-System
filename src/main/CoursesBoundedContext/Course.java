@@ -1,8 +1,10 @@
 package main.CoursesBoundedContext;
 
+import main.Modifiable;
+
 import java.util.ArrayList;
 
-public class Course {
+public class Course implements Modifiable {
     /**
      * Entity class that holds all pertinent information regarding a specific course.
      *
@@ -15,8 +17,13 @@ public class Course {
         this.courseId = courseId;
     }
 
-    public int getId(){
+    public int getID(){
         return courseId;
+    }
+
+    @Override
+    public boolean createNew() {
+        return false;
     }
 
     public ArrayList<Integer> getPrerequisites(){

@@ -19,6 +19,13 @@ public class StudentDataAccessLayer extends DataAccessLayer {
         this.keyID[0] = String.valueOf(keyID);
     }
 
+    public boolean createNew(Student student){
+        String[] insertColumn = new String[]{"student_id", "last_name", "first_name", "enroll_date","isHold"};
+        String[] insertValue = new String[]{String.valueOf(student.getID()), student.getLastName(), student.getFirstName(), student.getEnrollDate(), String.valueOf(student.getHold())};
+
+        return super.executeInsertQuery("students", insertColumn, insertValue);
+    }
+
     public String getLastName(){
         String[] col = new String[]{"last_name"};
         return getResult(col);

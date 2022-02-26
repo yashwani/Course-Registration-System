@@ -37,10 +37,14 @@ public class DataAccessLayer {
 
 
     public boolean executeInsertQuery(String tableName, String[] insertColumn, String[] columnValue){
+
+
+
         boolean result = true;
         int row = 0;
         try {
             String stmt = buildInsertStatement(tableName, insertColumn, columnValue);
+            System.out.println(stmt);
             PreparedStatement pst = conn.prepareStatement(stmt);
             row = pst.executeUpdate();
             System.out.println(row);

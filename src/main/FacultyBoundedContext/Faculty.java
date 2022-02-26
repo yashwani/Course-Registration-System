@@ -2,8 +2,9 @@ package main.FacultyBoundedContext;
 
 
 import main.AdminBoundedContext.FacultyCourseDataAccessLayer;
+import main.Modifiable;
 
-public class Faculty {
+public class Faculty implements Modifiable {
     /**
      * Entity class that holds all pertinent information regarding a specific faculty member.
      *
@@ -45,7 +46,13 @@ public class Faculty {
     }
 
 
+    @Override
+    public int getID() {
+        return facultyId;
+    }
 
-
-
+    @Override
+    public boolean createNew() {
+        return false;
+    }
 }

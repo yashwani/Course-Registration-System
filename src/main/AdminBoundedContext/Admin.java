@@ -1,17 +1,27 @@
 package main.AdminBoundedContext;
 
+import main.Modifiable;
+
 public class Admin {
 
     public Admin(){
 
     }
 
-    public void modifyStudent(){
-        /**
-         * should pass in a Student, and what they want to modify, and to what
-         */
 
+    public boolean create(Modifiable modifiable){
+        return modifiable.createNew();
     }
+
+    public boolean delete(Modifiable modifiable){
+        return true;
+    }
+
+    public boolean modify(Modifiable modifiable, String[] updateColumn, String[] updateValue){
+        return true;
+    }
+
+
 
 
 }

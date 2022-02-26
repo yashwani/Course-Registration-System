@@ -1,16 +1,20 @@
 package main.StudentBoundedContext;
 
+import main.Modifiable;
+
 import java.sql.SQLException;
 
-public class Student {
+public class Student implements Modifiable {
     /**
      * Entity class that holds all pertinent information regarding a specific student.
      *
      */
     private StudentDataAccessLayer studentdb;
     private int studentId;
-    private String lastName;
-    private String firstName;
+    private String lastName = "''";
+    private String firstName = "''";
+    private String enrollDate = "''";
+    private int isHold = 0;
 
 
     public Student(int studentId){
@@ -35,22 +39,56 @@ public class Student {
         return null;
     }
 
-    public int getId() {
+    public int getID() {
         return studentId;
     }
-    public String getLastName() {
-        return studentdb.getLastName();
+
+    @Override
+    public boolean createNew() {
+        return studentdb.createNew(this);
     }
-    public String getFirstName() {
-        return studentdb.getFirstName();
+
+    public String getLastNameDB() {
+        this.lastName =  studentdb.getLastName();
+        return lastName;
+    }
+    public String getFirstNameDB() {
+        this.firstName = studentdb.getFirstName();
+        return firstName;
+    }
+
+    public String getEnrollDateDB(){
+        this.enrollDate = studentdb.getEnrollDate();
+        return enrollDate;
+    }
+
+    public String getLastName(){
+        return lastName;
+    }
+
+    public String getFirstName(){
+        return firstName;
     }
 
     public String getEnrollDate(){
-        return studentdb.getEnrollDate();
+        return enrollDate;
     }
 
+    public int getHold(){
+        return isHold;
+    }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setHold(int hold){
+        this.isHold = hold;
+    }
 
 
 }

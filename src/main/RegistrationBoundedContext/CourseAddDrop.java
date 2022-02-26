@@ -25,10 +25,10 @@ public class CourseAddDrop {
 
     public CourseAddDrop(Student student, Course course){
         this.student = student;
-        this.courseId = course.getId();
+        this.courseId = course.getID();
         this.course = course;
         try {
-            studentdb = new StudentDataAccessLayer(this.student.getId());
+            studentdb = new StudentDataAccessLayer(this.student.getID());
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }
@@ -70,14 +70,14 @@ public class CourseAddDrop {
 
     private boolean instructorPermission(){
         //returns true if permission granted or no permission found
-        PermissionsDataAccessLayer p = new PermissionsDataAccessLayer(student.getId(),courseId);
+        PermissionsDataAccessLayer p = new PermissionsDataAccessLayer(student.getID(),courseId);
         String permission = p.getPermissions();
         return permission.equals("Granted") || permission.equals("PERMISSION NOT FOUND");
 
     }
 
     private boolean prereqSatisfy(){
-        PrevCourseDataAccessLayer p = new PrevCourseDataAccessLayer(student.getId());
+        PrevCourseDataAccessLayer p = new PrevCourseDataAccessLayer(student.getID());
         ArrayList<Integer> prevCourses = p.getPreviousCourses();
         ArrayList<Integer> prerequisites = course.getPrerequisites();
 
