@@ -48,4 +48,20 @@ public class FacultyDataAccessLayer extends DataAccessLayer implements Modifier 
 
         return super.executeInsertQuery("faculty", insertColumn, insertValue);
     }
+
+    @Override
+    public boolean delete(Modifiable faculty) {
+        String[] keyName = new String[]{"faculty_id"};
+        String[] keyID = new String[]{faculty.primaryKey()};
+
+        return super.executeDeleteQuery("faculty",keyName, keyID);
+    }
+
+    @Override
+    public boolean update(Modifiable faculty, String[] updateColumn, String[] updateValue){
+        String[] keyName = new String[]{"faculty_id"};
+        String[] keyID = new String[]{faculty.primaryKey()};
+
+        return super.executeUpdateQuery("faculty",updateColumn, updateValue, keyName, keyID);
+    };
 }

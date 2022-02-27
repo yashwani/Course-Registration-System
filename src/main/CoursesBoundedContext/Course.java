@@ -55,6 +55,11 @@ public class Course implements Modifiable {
         return result;
     }
 
+    @Override
+    public String primaryKey() {
+        return String.valueOf(courseId);
+    }
+
     public void setCourse_name(String course_name) {
         this.course_name = course_name;
     }

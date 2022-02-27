@@ -28,6 +28,22 @@ public class StudentDataAccessLayer extends DataAccessLayer implements Modifier 
         return super.executeInsertQuery("students", insertColumn, insertValue);
     }
 
+    @Override
+    public boolean delete(Modifiable student) {
+        String[] keyName = new String[]{"student_id"};
+        String[] keyID = new String[]{student.primaryKey()};
+
+        return super.executeDeleteQuery("students",keyName, keyID);
+    }
+
+    @Override
+    public boolean update(Modifiable student, String[] updateColumn, String[] updateValue) {
+        String[] keyName = new String[]{"student_id"};
+        String[] keyID = new String[]{student.primaryKey()};
+
+        return super.executeUpdateQuery("students",updateColumn, updateValue, keyName, keyID);
+    }
+
     public String getLastName(){
         String[] col = new String[]{"last_name"};
         return getResult(col);

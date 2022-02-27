@@ -32,6 +32,12 @@ public class DataAccessLayer {
             System.out.println("Error in connecting to database, or SQL Statement execution. ");
             result = false;
         }
+
+        if (row == 0){ //if record does not exist, row gets set to 0
+            result = false;
+        }
+
+
         return result;
     }
 

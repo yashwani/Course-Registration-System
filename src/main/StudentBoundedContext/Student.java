@@ -49,6 +49,11 @@ public class Student implements Modifiable {
         return new String[]{String.valueOf(studentId), lastName, firstName, enrollDate, String.valueOf(isHold)};
     }
 
+    @Override
+    public String primaryKey() {
+        return String.valueOf(studentId);
+    }
+
     public int getID() {
         return studentId;
     }

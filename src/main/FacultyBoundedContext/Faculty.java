@@ -66,4 +66,9 @@ public class Faculty implements Modifiable {
     public String[] listAttributes() {
         return new String[]{String.valueOf(facultyId),lastName, firstName};
     }
+
+    @Override
+    public String primaryKey() {
+        return String.valueOf(facultyId);
+    }
 }

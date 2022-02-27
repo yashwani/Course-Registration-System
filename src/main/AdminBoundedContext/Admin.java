@@ -1,25 +1,26 @@
 package main.AdminBoundedContext;
 
 import main.Modifiable;
+import main.Modifier;
 
 public class Admin {
 
     public Admin(){
-
     }
 
-
     public boolean create(Modifiable modifiable){
-//        return modifiable.createNew();
-        return false;
+        Modifier modifier = modifiable.getDataAccessLayer();
+        return modifier.createNew(modifiable);
     }
 
     public boolean delete(Modifiable modifiable){
-        return true;
+        Modifier modifier = modifiable.getDataAccessLayer();
+        return modifier.delete(modifiable);
     }
 
     public boolean modify(Modifiable modifiable, String[] updateColumn, String[] updateValue){
-        return true;
+        Modifier modifier = modifiable.getDataAccessLayer();
+        return modifier.update(modifiable, updateColumn, updateValue);
     }
 
 
