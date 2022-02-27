@@ -1,6 +1,8 @@
 package main.StudentBoundedContext;
 
 import main.Modifiable;
+import main.Modifier;
+import main.db.DataAccessLayer;
 
 import java.sql.SQLException;
 
@@ -34,19 +36,23 @@ public class Student implements Modifiable {
          */
         //calls addCourse in StudentRegistration
 
-
-
         return null;
+    }
+
+    @Override
+    public Modifier getDataAccessLayer(){
+        return studentdb;
+    }
+
+    @Override
+    public String[] listAttributes() {
+        return new String[]{String.valueOf(studentId), lastName, firstName, enrollDate, String.valueOf(isHold)};
     }
 
     public int getID() {
         return studentId;
     }
 
-    @Override
-    public boolean createNew() {
-        return studentdb.createNew(this);
-    }
 
     public String getLastNameDB() {
         this.lastName =  studentdb.getLastName();
@@ -62,21 +68,7 @@ public class Student implements Modifiable {
         return enrollDate;
     }
 
-    public String getLastName(){
-        return lastName;
-    }
 
-    public String getFirstName(){
-        return firstName;
-    }
-
-    public String getEnrollDate(){
-        return enrollDate;
-    }
-
-    public int getHold(){
-        return isHold;
-    }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
@@ -86,9 +78,26 @@ public class Student implements Modifiable {
         this.firstName = firstName;
     }
 
-    public void setHold(int hold){
-        this.isHold = hold;
-    }
+
+    //    public String getLastName(){
+//        return lastName;
+//    }
+//
+//    public String getFirstName(){
+//        return firstName;
+//    }
+//
+//    public String getEnrollDate(){
+//        return enrollDate;
+//    }
+//
+//    public int getHold(){
+//        return isHold;
+//    }
+
+//    public void setHold(int hold){
+//        this.isHold = hold;
+//    }
 
 
 }

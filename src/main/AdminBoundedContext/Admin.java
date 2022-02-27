@@ -10,7 +10,8 @@ public class Admin {
 
 
     public boolean create(Modifiable modifiable){
-        return modifiable.createNew();
+//        return modifiable.createNew();
+        return false;
     }
 
     public boolean delete(Modifiable modifiable){
@@ -20,8 +21,6 @@ public class Admin {
     public boolean modify(Modifiable modifiable, String[] updateColumn, String[] updateValue){
         return true;
     }
-
-
 
 
 }

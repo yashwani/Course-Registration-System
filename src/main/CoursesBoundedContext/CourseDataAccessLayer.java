@@ -1,9 +1,11 @@
 package main.CoursesBoundedContext;
+import main.Modifiable;
+import main.Modifier;
 import main.db.DataAccessLayer;
 
 import java.util.ArrayList;
 
-public class CourseDataAccessLayer extends DataAccessLayer {
+public class CourseDataAccessLayer extends DataAccessLayer implements Modifier {
     /**
      * Provides an abstraction layer to the courses table in the database
      * If switching databases, update code in this class
@@ -30,7 +32,7 @@ public class CourseDataAccessLayer extends DataAccessLayer {
 
         ArrayList<Integer> result = new ArrayList<>();
         for (int i = 0; i < resultString.get(0).size(); i++) {
-            if (resultString.get(0).get(i) == null){
+            if (resultString.get(0).get(i) == null || resultString.get(0).get(i).equals("-1")){ //null and -1 indicate no prerequisite
                 continue;
             }
             result.add(Integer.valueOf(resultString.get(0).get(i)));
@@ -38,4 +40,11 @@ public class CourseDataAccessLayer extends DataAccessLayer {
         return result;
     }
 
+    @Override
+    public boolean createNew(Modifiable course) {
+        String[] insertColumn = new String[]{"course_id", "course_name", "isOpen", "instructor", "instructor_permission", "prereq1_id", "prereq2_id", "prereq3_id"};
+        String[] insertValue = course.listAttributes();
+
+        return super.executeInsertQuery("courses", insertColumn, insertValue);
+    }
 }

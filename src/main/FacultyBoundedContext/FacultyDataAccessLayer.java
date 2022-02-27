@@ -1,10 +1,12 @@
 package main.FacultyBoundedContext;
 
+import main.Modifiable;
+import main.Modifier;
 import main.db.DataAccessLayer;
 
 import java.util.ArrayList;
 
-public class FacultyDataAccessLayer extends DataAccessLayer {
+public class FacultyDataAccessLayer extends DataAccessLayer implements Modifier {
     /**
      * Provides an abstraction layer to the faculty table in the database
      * If switching databases, update code in this class
@@ -39,6 +41,11 @@ public class FacultyDataAccessLayer extends DataAccessLayer {
     }
 
 
+    @Override
+    public boolean createNew(Modifiable faculty) {
+        String[] insertColumn = new String[]{"faculty_id", "last_name", "first_name"};
+        String[] insertValue = faculty.listAttributes();
 
-
+        return super.executeInsertQuery("faculty", insertColumn, insertValue);
+    }
 }

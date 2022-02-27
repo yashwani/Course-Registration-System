@@ -1,9 +1,11 @@
 package main;
 
+import main.db.DataAccessLayer;
+
 public interface Modifiable {
 
-    public int getID();
+    public Modifier getDataAccessLayer();
 
-    public boolean createNew();
+    public String[] listAttributes();
 
 }

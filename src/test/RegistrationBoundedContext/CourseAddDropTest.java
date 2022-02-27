@@ -57,4 +57,22 @@ class CourseAddDropTest {
         assertEquals(expected.isSuccess(), actual.isSuccess());
         assertEquals(expected.getReason(), actual.getReason());
     }
+
+    @Test
+    void addHenryToTest(){
+        Student henry = new Student(10825);
+        Course test = new Course(10005);
+        CourseAddDrop courseAddDrop = new CourseAddDrop(henry, test);
+        RequestResponse actual = courseAddDrop.addCourse();
+
+        RequestResponse expected = new RequestResponse();
+        expected.setSuccess(true);
+        expected.addReason("Course Registration Successful");
+
+        assertEquals(expected.getReason(), actual.getReason());
+        assertEquals(expected.isSuccess(), actual.isSuccess());
+
+    }
+
+
 }

@@ -1,10 +1,12 @@
 package main.StudentBoundedContext;
+import main.Modifiable;
+import main.Modifier;
 import main.db.DataAccessLayer;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-public class StudentDataAccessLayer extends DataAccessLayer {
+public class StudentDataAccessLayer extends DataAccessLayer implements Modifier {
     /**
      * Provides an abstraction layer to the students table in the database
      * If switching databases, update code in this class
@@ -19,9 +21,9 @@ public class StudentDataAccessLayer extends DataAccessLayer {
         this.keyID[0] = String.valueOf(keyID);
     }
 
-    public boolean createNew(Student student){
+    public boolean createNew(Modifiable student){
         String[] insertColumn = new String[]{"student_id", "last_name", "first_name", "enroll_date","isHold"};
-        String[] insertValue = new String[]{String.valueOf(student.getID()), student.getLastName(), student.getFirstName(), student.getEnrollDate(), String.valueOf(student.getHold())};
+        String[] insertValue = student.listAttributes();
 
         return super.executeInsertQuery("students", insertColumn, insertValue);
     }
@@ -53,6 +55,8 @@ public class StudentDataAccessLayer extends DataAccessLayer {
         return super.booleanConverter(res);
     }
 
+
+
     private String getResult(String[] col){
         ArrayList<ArrayList<String>> result = super.executeSelectQuery(col,tableName,keyName,keyID);
         if (result.isEmpty() || result.get(0).isEmpty()){
@@ -60,78 +64,6 @@ public class StudentDataAccessLayer extends DataAccessLayer {
         }
         return result.get(0).get(0);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    public ResultSet res;
-//
-//    public StudentDataAccessLayer(int studentId) throws SQLException {
-//        DatabaseConnection db = DatabaseConnection.getInstance();
-//        Connection conn = db.dbConnection;
-//
-//        String stmt = "SELECT * FROM students WHERE student_id = ?";
-//        PreparedStatement pst = conn.prepareStatement(stmt);
-//        pst.setString(1,String.valueOf(studentId));
-//        res = pst.executeQuery();
-//        res.next(); //moves cursor to row with data
-//    }
-//
-//    public String getLastName(){
-//        try {
-//            return res.getString("last_name");
-//        }
-//        catch (SQLException e){
-//            System.out.println("Unable to find last name for student.");
-//            return null;
-//        }
-//    }
-//
-//    public String getFirstName(){
-//        try {
-//            return res.getString("first_name");
-//        }
-//        catch (SQLException e){
-//            System.out.println("Unable to find first name for student.");
-//            return null;
-//        }
-//    }
-//
-//    public String getEnrollDate(){
-//        try {
-//            return res.getString("enroll_date");
-//        }
-//        catch (SQLException e){
-//            System.out.println("Unable to find enrollment date for student.");
-//            return null;
-//        }
-//    }
-//
-//    public boolean getHoldStatus(){
-//        try {
-//            return res.getBoolean("isHold");
-//        }
-//        catch (SQLException e){
-//            System.out.println("Unable to find enrollment date for student.");
-//            System.exit(1);
-//            return false;
-//        }
-//    }
-
-
-
-
 
 
 }

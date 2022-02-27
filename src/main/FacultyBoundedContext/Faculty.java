@@ -3,8 +3,11 @@ package main.FacultyBoundedContext;
 
 import main.AdminBoundedContext.FacultyCourseDataAccessLayer;
 import main.Modifiable;
+import main.Modifier;
 
 public class Faculty implements Modifiable {
+
+
     /**
      * Entity class that holds all pertinent information regarding a specific faculty member.
      *
@@ -45,14 +48,22 @@ public class Faculty implements Modifiable {
         return facultydb.getFirstName();
     }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
 
     @Override
-    public int getID() {
-        return facultyId;
+    public Modifier getDataAccessLayer() {
+        return facultydb;
     }
 
     @Override
-    public boolean createNew() {
-        return false;
+    public String[] listAttributes() {
+        return new String[]{String.valueOf(facultyId),lastName, firstName};
     }
 }
