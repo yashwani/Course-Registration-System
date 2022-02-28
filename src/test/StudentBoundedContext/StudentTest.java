@@ -8,6 +8,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class StudentTest {
 
     @Test
+    void browseCourses(){
+        Student x = new Student(10824);
+        x.browseCourses();
+    }
+
+    @Test
     void testCarltonFirstName() {
         Student x = new Student(10824);
         assertEquals("Carlton",x.getFirstNameDB());

@@ -26,6 +26,16 @@ public class CourseDataAccessLayer extends DataAccessLayer implements Modifier {
         return null;
     }
 
+    public ArrayList<ArrayList<String>> selectAllCourses(){
+        String[] columnsSelected = new String[]{"course_id", "course_name", "isOpen", "instructor", "instructor_permission", "prereq1_id", "prereq2_id", "prereq3_id"};
+        String tableName = "courses";
+        String[] keyName = new String[]{"course_id"};
+        String[] keyId = new String[]{"course_id"};
+
+        return super.executeSelectQuery(columnsSelected,tableName,keyName,keyId);
+
+    }
+
     public ArrayList<Integer> getPrerequisites(){
         String[] columnsSelected = new String[]{"prereq1_id", "prereq2_id", "prereq3_id"};
         ArrayList<ArrayList<String>> resultString = super.executeSelectQuery(columnsSelected, tableName, keyName, keyID);

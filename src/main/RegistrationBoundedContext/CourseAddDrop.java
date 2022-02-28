@@ -32,10 +32,7 @@ public class CourseAddDrop {
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }
-
         //initialize course database here
-
-
     }
 
     public RequestResponse addCourse() {
@@ -63,6 +60,18 @@ public class CourseAddDrop {
 
         return resp;
     }
+
+    public RequestResponse dropCourse(){
+
+
+
+        return null;
+    }
+
+
+
+
+
 
     private boolean hold(){
         return studentdb.getHoldStatus();

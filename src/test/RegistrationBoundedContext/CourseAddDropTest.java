@@ -10,6 +10,25 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CourseAddDropTest {
 
+
+    @Test
+    void CourseDNE() {
+        Student gus = new Student(10822);
+        Course cloudComputing = new Course(-1);
+        CourseAddDrop courseAddDrop = new CourseAddDrop(gus, cloudComputing);
+        RequestResponse actual = courseAddDrop.addCourse();
+
+        RequestResponse expected = new RequestResponse();
+        expected.setSuccess(true);
+        expected.addReason("Course Registration Successful");
+
+        System.out.println(expected.getReason());
+        System.out.println(actual.getReason());
+
+        assertEquals(expected.isSuccess(), actual.isSuccess());
+        assertEquals(expected.getReason(), actual.getReason());
+    }
+
     @Test
     void addGusToCloudComputing() {
         Student gus = new Student(10822);

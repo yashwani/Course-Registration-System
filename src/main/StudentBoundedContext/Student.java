@@ -1,10 +1,14 @@
 package main.StudentBoundedContext;
 
+import main.CoursesBoundedContext.CourseDataAccessLayer;
 import main.Modifiable;
 import main.Modifier;
+import main.RegistrationBoundedContext.RequestResponse;
+import main.RegistrationBoundedContext.StudentRegistration;
 import main.db.DataAccessLayer;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Student implements Modifiable {
     /**
@@ -38,6 +42,19 @@ public class Student implements Modifiable {
 
         return null;
     }
+
+    public String dropCourse(int courseID){
+        StudentRegistration s = new StudentRegistration();
+        RequestResponse r = s.dropCourse(this, courseID);
+        return null;
+    }
+
+    public void browseCourses(){
+        StudentRegistration s = new StudentRegistration();
+        s.browseCourses();
+    }
+
+
 
     @Override
     public Modifier getDataAccessLayer(){
@@ -83,26 +100,6 @@ public class Student implements Modifiable {
         this.firstName = firstName;
     }
 
-
-    //    public String getLastName(){
-//        return lastName;
-//    }
-//
-//    public String getFirstName(){
-//        return firstName;
-//    }
-//
-//    public String getEnrollDate(){
-//        return enrollDate;
-//    }
-//
-//    public int getHold(){
-//        return isHold;
-//    }
-
-//    public void setHold(int hold){
-//        this.isHold = hold;
-//    }
 
 
 }

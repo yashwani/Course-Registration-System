@@ -134,6 +134,22 @@ class dataAccessLayerTest {
 
     }
 
+    @Test
+    void executeSelectEverything(){
+        DataAccessLayer db = new DataAccessLayer();
+        String[] columnsSelected = new String[]{"course_id"};
+        String tableName = "courses";
+        String[] keyName = new String[]{"course_id"};
+        String[] keyId = new String[]{"course_id"};
+        ArrayList<ArrayList<String>> actual = db.executeSelectQuery(columnsSelected, tableName, keyName, keyId);
+
+        System.out.println(actual);
+
+
+
+
+    }
+
 
 
 
@@ -201,6 +217,22 @@ class dataAccessLayerTest {
 //        String[] keyId = new String[]{"10821", "10000"};
 //        String actual = db.buildUpdateStatement(tableName, updateColumn, updateValue, keyName, keyId);
 //        String expected = "UPDATE grades SET grade='E' WHERE student_id = 10821 AND course_id = 10000";
+//
+//        System.out.println(actual);
+//        System.out.println(expected);
+//
+//        assertEquals(expected, actual);
+//    }
+
+//    @Test
+//    void selectStatementSelectEverything(){
+//        DataAccessLayer db = new DataAccessLayer();
+//        String[] columnsSelected = new String[]{"*"};
+//        String tableName = "courses";
+//        String[] keyName = new String[]{"course_id"};
+//        String[] keyId = new String[]{"course_id"};
+//        String actual = db.buildSelectStatement(columnsSelected, tableName, keyName, keyId);
+//        String expected = "SELECT * FROM courses WHERE course_id = course_id";
 //
 //        System.out.println(actual);
 //        System.out.println(expected);

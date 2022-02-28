@@ -72,6 +72,7 @@ public class DataAccessLayer {
         ArrayList<ArrayList<String>> result = new ArrayList<>();
         try {
             String stmt = buildSelectStatement(columnsSelected, tableName, keyName, keyID);
+            System.out.println(stmt);
             PreparedStatement pst = conn.prepareStatement(stmt);
             res = pst.executeQuery();
 
@@ -86,6 +87,7 @@ public class DataAccessLayer {
 
         } catch (SQLException e){
             System.out.println("Error in connecting to database, or SQL Statement execution.");
+            System.out.println(e.getMessage());
         }
         return result;
     }
