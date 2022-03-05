@@ -18,6 +18,7 @@ public class Faculty implements Modifiable {
     private String lastName;
     private String firstName;
     private FacultyDataAccessLayer facultydb;
+    private String email;
 
     public Faculty(int faculty_id){
         this.facultyId = faculty_id;
@@ -26,8 +27,8 @@ public class Faculty implements Modifiable {
 
     public String assignGrade(int course_id, int student_id, String grade){
 
-        FacultyCourseDataAccessLayer f = new FacultyCourseDataAccessLayer(facultyId, course_id);
-        if (!f.isTeachingCourse()){
+        FacultyCourseDataAccessLayer f = new FacultyCourseDataAccessLayer();
+        if (!f.isTeachingCourse(facultyId, course_id)){
             return "Sorry, you cannot update a course that you do not teach.";
         }
 
@@ -39,6 +40,7 @@ public class Faculty implements Modifiable {
         return "Successfully assigned grade";
 
     }
+
 
     public String getLastName() {
         return facultydb.getLastName();

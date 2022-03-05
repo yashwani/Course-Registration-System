@@ -6,7 +6,9 @@ import main.CoursesBoundedContext.CourseDataAccessLayer;
 import main.CoursesBoundedContext.CourseFactory;
 import main.StudentBoundedContext.Student;
 
+import javax.management.remote.rmi._RMIConnection_Stub;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class StudentRegistration {
     /**
@@ -36,15 +38,41 @@ public class StudentRegistration {
 
         //send the student and course to CourseAddDrop to handle actually adding/dropping the course
         CourseAddDrop courseAddDrop = new CourseAddDrop(student,course);
-        r = courseAddDrop.dropCourse();
-        return null;
+        return courseAddDrop.dropCourse();
     }
 
     public RequestResponse dropAllCourses(Student student){
-        return null;
+        RequestResponse result = new RequestResponse();
+        ArrayList<Integer> courses = getallCoursesForStudent(student);
+        for (int i = 0; i < courses.size(); i++) {
+            int course = courses.get(i);
+            RequestResponse r = dropCourse(student,course);
+            if (!r.isSuccess()){
+                result.setSuccess(false);
+                result.addReason("Something went wrong with dropping course: " + String.valueOf(course));
+            }
+
+        }
+
+        return result;
+    }
+
+    private ArrayList<Integer> getallCoursesForStudent(Student student){
+        StudentsCoursesDataAccessLayer s = new StudentsCoursesDataAccessLayer();
+        ArrayList<ArrayList<String>> resp = s.getCoursesForStudent(student);
+
+        ArrayList<Integer> result = new ArrayList<>();
+
+
+        for (int i = 0; i < resp.size(); i++) {
+            result.add(Integer.valueOf(resp.get(i).get(0)));
+        }
+        return result;
+
     }
 
     public void browseCourses(){
+
         CourseDataAccessLayer c = new CourseDataAccessLayer(-1);
         ArrayList<ArrayList<String>> courses = c.selectAllCourses();
 

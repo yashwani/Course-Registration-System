@@ -45,8 +45,14 @@ public class Student implements Modifiable {
 
     public String dropCourse(int courseID){
         StudentRegistration s = new StudentRegistration();
-        RequestResponse r = s.dropCourse(this, courseID);
-        return null;
+        RequestResponse requestResponse = s.dropCourse(this, courseID);
+        return requestResponse.getReason();
+    }
+
+    public String dropAllCourses(){
+        StudentRegistration s = new StudentRegistration();
+        RequestResponse requestResponse = s.dropAllCourses(this);
+        return requestResponse.getReason();
     }
 
     public void browseCourses(){

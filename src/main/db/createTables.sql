@@ -34,6 +34,11 @@ student_id int NOT NULL, permission_recieved boolean NOT NULL DEFAULT 0 , studen
 
 INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10000, 'Cloud Computing', 10821, 'Enrolled');
 INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10000, 'Cloud Computing', 10823, 'Enrolled');
+INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10000, 'Cloud Computing', 10822, 'Enrolled');
+INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10000, 'Cloud Computing', 10824, 'Enrolled');
+INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10001, 'Cloud Computing', 10824, 'Enrolled');
+INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10002, 'Cloud Computing', 10824, 'Enrolled');
+INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10003, 'Cloud Computing', 10824, 'Enrolled');
 
 
 
@@ -47,10 +52,11 @@ INSERT INTO Grades(course_id, student_id) VALUES(10000, 10823);
 
 
 DROP TABLE IF EXISTS Faculty;
-CREATE TABLE Faculty (faculty_id int NOT NULL, last_name varchar(255) NOT NULL, first_name varchar(255) NOT NULL, PRIMARY KEY(faculty_id));
+CREATE TABLE Faculty (faculty_id int NOT NULL, last_name varchar(255) NOT NULL, first_name varchar(255) NOT NULL, email varchar(255), PRIMARY KEY(faculty_id));
 
-INSERT INTO FACULTY (faculty_id, last_name, first_name) VALUES (20000, 'Bob','Billy');
-INSERT INTO FACULTY (faculty_id, last_name, first_name) VALUES (20001, 'Johnson','Jim');
+INSERT INTO FACULTY (faculty_id, last_name, first_name, email) VALUES (20000, 'Bob','Billy', 'billybob@hotmail.com');
+INSERT INTO FACULTY (faculty_id, last_name, first_name, email) VALUES (20001, 'Johnson','Jim', 'jimJohnson@AOL.com');
+
 
 
 
@@ -59,6 +65,7 @@ CREATE TABLE Courses_Faculty(course_id int NOT NULL, faculty_id int NOT NULL);
 
 INSERT INTO Courses_Faculty(course_id, faculty_id) VALUES (10000, 20000);
 INSERT INTO Courses_Faculty(course_id, faculty_id) VALUES (10001, 20001);
+INSERT INTO Courses_Faculty(course_id, faculty_id) VALUES (10002, 20001);
 
 
 

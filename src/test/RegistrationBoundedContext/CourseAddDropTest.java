@@ -10,6 +10,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CourseAddDropTest {
 
+    @Test
+    void dropACourse(){
+        CourseAddDrop courseAddDrop = new CourseAddDrop(new Student(19999), new Course(10001));
+        RequestResponse actual = courseAddDrop.dropCourse();
+        RequestResponse expected = new RequestResponse();
+        expected.setSuccess(true);
+        assertEquals(expected.isSuccess(), actual.isSuccess());
+    }
+
 
     @Test
     void CourseDNE() {

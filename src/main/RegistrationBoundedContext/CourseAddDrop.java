@@ -1,11 +1,14 @@
 package main.RegistrationBoundedContext;
 
+import main.AdminBoundedContext.FacultyCourseDataAccessLayer;
 import main.CoursesBoundedContext.Course;
 import main.CoursesBoundedContext.PrevCourseDataAccessLayer;
+import main.FacultyBoundedContext.FacultyDataAccessLayer;
 import main.StudentBoundedContext.Student;
 import main.StudentBoundedContext.StudentDataAccessLayer;
 
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -20,6 +23,7 @@ public class CourseAddDrop {
     public StudentDataAccessLayer studentdb;
     private Student student;
     private Course course;
+    private int studentId;
     private int courseId;
 
 
@@ -46,6 +50,7 @@ public class CourseAddDrop {
         }
         if (!instructorPermission()){
             resp.addReason("Instructor has denied permission");
+            emailInstructor();
             resp.setSuccess(false);
         }
         if (!prereqSatisfy()){
@@ -62,10 +67,30 @@ public class CourseAddDrop {
     }
 
     public RequestResponse dropCourse(){
+        RequestResponse r = new RequestResponse();
 
+        StudentsCoursesDataAccessLayer studentsCoursesDataAccessLayer = new StudentsCoursesDataAccessLayer();
+        if (studentsCoursesDataAccessLayer.deleteStudentFromCourse(student, course)){
+            r.setSuccess(true);
+            r.addReason("Successfully dropped course.");
+        } else{
+            r.setSuccess(false);
+            r.addReason("Something went wrong with the connection to the database.");
+        };
+        return r;
 
+    }
 
-        return null;
+    private void emailInstructor(){
+        //find out which instructor teaches course
+        FacultyCourseDataAccessLayer fc = new FacultyCourseDataAccessLayer();
+        int faculty_id = fc.courseInstructor(course);
+        //find out email address for given instructor
+        FacultyDataAccessLayer f = new FacultyDataAccessLayer(faculty_id);
+        String email = f.getEmail();
+
+        //send email
+        System.out.println("Sending email to " + email + " about student " + student.getFirstNameDB() + " " + student.getLastNameDB() + "'s registration in course " + String.valueOf(courseId));
     }
 
 

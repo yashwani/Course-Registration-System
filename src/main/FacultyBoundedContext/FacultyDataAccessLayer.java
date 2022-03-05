@@ -32,6 +32,11 @@ public class FacultyDataAccessLayer extends DataAccessLayer implements Modifier 
         return getResult(col);
     }
 
+    public String getEmail(){
+        String[] col = new String[]{"email"};
+        return getResult(col);
+    }
+
     private String getResult(String[] col){
         ArrayList<ArrayList<String>> result = super.executeSelectQuery(col,tableName,keyName,keyID);
         if (result.isEmpty() || result.get(0).isEmpty()){
@@ -39,6 +44,8 @@ public class FacultyDataAccessLayer extends DataAccessLayer implements Modifier 
         }
         return result.get(0).get(0);
     }
+
+
 
 
     @Override

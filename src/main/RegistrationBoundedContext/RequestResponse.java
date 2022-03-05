@@ -10,7 +10,7 @@ public class RequestResponse {
 
 
     private boolean isSuccess;
-    private String reason;
+    private String reason = "";
 
     public boolean isSuccess() {
         return isSuccess;
