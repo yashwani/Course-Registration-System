@@ -4,6 +4,7 @@ package main.FacultyBoundedContext;
 import main.AdminBoundedContext.FacultyCourseDataAccessLayer;
 import main.Modifiable;
 import main.Modifier;
+import main.RegistrationBoundedContext.RequestResponse;
 
 public class Faculty implements Modifiable {
 
@@ -25,20 +26,26 @@ public class Faculty implements Modifiable {
         facultydb = new FacultyDataAccessLayer(faculty_id);
     }
 
-    public String assignGrade(int course_id, int student_id, String grade){
+    public RequestResponse assignGrade(int course_id, int student_id, String grade){
+        RequestResponse requestResponse = new RequestResponse();
+
 
         FacultyCourseDataAccessLayer f = new FacultyCourseDataAccessLayer();
         if (!f.isTeachingCourse(facultyId, course_id)){
-            return "Sorry, you cannot update a course that you do not teach.";
+            requestResponse.addReason("Sorry, you cannot update a course that you do not teach.");
+            requestResponse.setSuccess(false);
+            return requestResponse;
         }
 
         GradesDataAccessLayer g = new GradesDataAccessLayer(course_id, student_id);
         if (!g.updateGrade(grade)){
-            return "Sorry, your grade update failed. Please ensure the student is in your course, and that you have entered a valid grade type";
+            requestResponse.addReason("Sorry, your grade update failed. Please ensure the student is in your course, and that you have entered a valid grade type");
+            requestResponse.setSuccess(false);
+            return requestResponse;
         }
 
-        return "Successfully assigned grade";
-
+        requestResponse.setSuccess(true);
+        return requestResponse;
     }
 
 
@@ -56,6 +63,10 @@ public class Faculty implements Modifiable {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public int getID(){
+        return facultyId;
     }
 
 
