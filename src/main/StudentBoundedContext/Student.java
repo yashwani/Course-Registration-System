@@ -1,5 +1,6 @@
 package main.StudentBoundedContext;
 
+import main.CoursesBoundedContext.Course;
 import main.CoursesBoundedContext.CourseDataAccessLayer;
 import main.Modifiable;
 import main.Modifier;
@@ -34,25 +35,22 @@ public class Student implements Modifiable {
 
     }
 
-    public String requestAddCourse(int courseID){
-        /**
-         *
-         */
-        //calls addCourse in StudentRegistration
-
-        return null;
+    public RequestResponse addCourse(int courseID){
+        StudentRegistration s = new StudentRegistration();
+        RequestResponse r = s.addCourse(this, new Course(courseID));
+        return r;
     }
 
-    public String dropCourse(int courseID){
+    public RequestResponse dropCourse(int courseID){
         StudentRegistration s = new StudentRegistration();
         RequestResponse requestResponse = s.dropCourse(this, courseID);
-        return requestResponse.getReason();
+        return requestResponse;
     }
 
-    public String dropAllCourses(){
+    public RequestResponse dropAllCourses(){
         StudentRegistration s = new StudentRegistration();
         RequestResponse requestResponse = s.dropAllCourses(this);
-        return requestResponse.getReason();
+        return requestResponse;
     }
 
     public void browseCourses(){

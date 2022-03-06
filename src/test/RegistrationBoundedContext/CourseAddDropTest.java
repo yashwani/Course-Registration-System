@@ -40,9 +40,9 @@ class CourseAddDropTest {
 
     @Test
     void addGusToCloudComputing() {
-        Student gus = new Student(10822);
+        Student newt = new Student(10829);
         Course cloudComputing = new Course(10000);
-        CourseAddDrop courseAddDrop = new CourseAddDrop(gus, cloudComputing);
+        CourseAddDrop courseAddDrop = new CourseAddDrop(newt, cloudComputing);
         RequestResponse actual = courseAddDrop.addCourse();
 
         RequestResponse expected = new RequestResponse();

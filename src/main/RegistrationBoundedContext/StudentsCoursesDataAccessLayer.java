@@ -28,6 +28,12 @@ public class StudentsCoursesDataAccessLayer extends DataAccessLayer {
         }
     }
 
+    public boolean addStudentToCourse(Student student, Course course){
+        String[] insertColumn = new String[]{"course_id", "student_id","student_status"};
+        String[] columnValue = new String[]{String.valueOf(course.getID()), String.valueOf(student.getID()), "'Enrolled'"};
+        return super.executeInsertQuery(tableName,insertColumn,columnValue);
+    }
+
     public boolean deleteStudentFromCourse(Student student, Course course){
         String[] keyNames = new String[]{"student_id", "course_id"};
         String[] keyValues = new String[]{String.valueOf(student.getID()), String.valueOf(course.getID())};

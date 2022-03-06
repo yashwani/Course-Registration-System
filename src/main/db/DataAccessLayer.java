@@ -26,7 +26,6 @@ public class DataAccessLayer {
             String stmt = buildDeleteStatement(tableName, keyName, keyID);
             PreparedStatement pst = conn.prepareStatement(stmt);
             row = pst.executeUpdate();
-            System.out.println(row);
 
         } catch(SQLException e){
             System.out.println("Error in connecting to database, or SQL Statement execution. ");
@@ -50,10 +49,8 @@ public class DataAccessLayer {
         int row = 0;
         try {
             String stmt = buildInsertStatement(tableName, insertColumn, columnValue);
-            System.out.println(stmt);
             PreparedStatement pst = conn.prepareStatement(stmt);
             row = pst.executeUpdate();
-            System.out.println(row);
         } catch(SQLException e){
             System.out.println("Error in connecting to database, or SQL Statement execution. ");
             result = false;
@@ -72,7 +69,6 @@ public class DataAccessLayer {
         ArrayList<ArrayList<String>> result = new ArrayList<>();
         try {
             String stmt = buildSelectStatement(columnsSelected, tableName, keyName, keyID);
-            System.out.println(stmt);
             PreparedStatement pst = conn.prepareStatement(stmt);
             res = pst.executeQuery();
 
@@ -100,7 +96,6 @@ public class DataAccessLayer {
             String stmt = buildUpdateStatement(tableName, updateColumn, updateValue, keyName, keyID);
             PreparedStatement pst = conn.prepareStatement(stmt);
             row = pst.executeUpdate();
-            System.out.println(row);
         } catch (SQLException e){
             result = false;
         }
@@ -147,10 +142,8 @@ public class DataAccessLayer {
             }
             columnClause = columnClause + insertColumn[i] + sep;
         }
-        System.out.println(columnClause);
 
         columnClause = "(" + columnClause + ")";
-        System.out.println(columnClause);
 
         String valuesClause = " VALUES ";
         String columnValues = "";

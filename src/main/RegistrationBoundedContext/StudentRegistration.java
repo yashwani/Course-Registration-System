@@ -17,8 +17,8 @@ public class StudentRegistration {
 
     public RequestResponse addCourse(Student student, Course course){
         CourseAddDrop courseAddDrop = new CourseAddDrop(student, course);
-        courseAddDrop.addCourse();
-        return null;
+        RequestResponse r = courseAddDrop.addCourse();
+        return r;
     }
 
     public RequestResponse dropCourse(Student student, int courseID){
@@ -44,12 +44,20 @@ public class StudentRegistration {
     public RequestResponse dropAllCourses(Student student){
         RequestResponse result = new RequestResponse();
         ArrayList<Integer> courses = getallCoursesForStudent(student);
+
+        if (courses.size() == 0){
+            result.setSuccess(false);
+            result.addReason("Not registered for any courses.");
+        }
+
         for (int i = 0; i < courses.size(); i++) {
             int course = courses.get(i);
             RequestResponse r = dropCourse(student,course);
             if (!r.isSuccess()){
                 result.setSuccess(false);
                 result.addReason("Something went wrong with dropping course: " + String.valueOf(course));
+            } else{
+                result.setSuccess(true);
             }
 
         }

@@ -61,6 +61,9 @@ public class CourseAddDrop {
         if(resp.isSuccess()){
             resp.addReason("Course Registration Successful");
             //implement adding course to student in database here
+            StudentsCoursesDataAccessLayer sc = new StudentsCoursesDataAccessLayer();
+            sc.addStudentToCourse(student,course);
+
         }
 
         return resp;

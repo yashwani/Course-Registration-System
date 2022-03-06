@@ -30,6 +30,10 @@ class StudentRegistrationTest {
 
     @Test
     void dropAllCourses() {
+        StudentRegistration sr = new StudentRegistration();
+        RequestResponse r = sr.dropAllCourses(new Student(10821));
+        System.out.println(r.getReason());
+        assertTrue(r.isSuccess());
     }
 
     @Test
