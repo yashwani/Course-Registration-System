@@ -12,8 +12,10 @@ public class Driver {
 //        StudentTextDriver driver = new StudentTextDriver(student);
 //        driver.execute();
 
-        Faculty faculty = new Faculty(20000);
-        FacultyTextDriver driver = new FacultyTextDriver(faculty);
-        driver.execute();
+//        Faculty faculty = new Faculty(20000);
+//        FacultyTextDriver driver = new FacultyTextDriver(faculty);
+//        driver.execute();
+
+
     }
 }
