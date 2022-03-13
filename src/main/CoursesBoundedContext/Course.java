@@ -69,6 +69,10 @@ public class Course implements Modifiable {
         return result;
     }
 
+    public String[] modifiableAttributes(){
+        return new String[]{"course_id", "course_name", "isOpen", "instructor", "instructor_permission", "pereq1_id", "prereq2_id", "prereq3_id"};
+    }
+
     @Override
     public String primaryKey() {
         return String.valueOf(courseId);

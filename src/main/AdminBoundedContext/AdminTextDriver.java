@@ -28,6 +28,10 @@ public class AdminTextDriver {
             System.out.println("\u2022 Enter 'D' to delete a course.");
             System.out.println("\u2022 Enter 'E' to delete a student.");
             System.out.println("\u2022 Enter 'F' to delete a faculty.");
+            System.out.println("\u2022 Enter 'G' to modify a course.");
+            System.out.println("\u2022 Enter 'H' to modify a student.");
+            System.out.println("\u2022 Enter 'I' to modify a faculty.");
+            System.out.println("\u2022 Q to quit.");
 
             Scanner scan = new Scanner(System.in);
             String choice = scan.next();
@@ -50,7 +54,16 @@ public class AdminTextDriver {
             } else if (choice.equals("F")) {
                 FacultyBuilder facultyBuilder = new FacultyBuilder();
                 delete(facultyBuilder);
-            } else if (choice.equals("Q")){
+            } else if (choice.equals("G")) {
+                CourseBuilder courseBuilder = new CourseBuilder();
+                modify(courseBuilder);
+            }  else if (choice.equals("H")) {
+                StudentBuilder studentBuilder = new StudentBuilder();
+                modify(studentBuilder);
+            } else if (choice.equals("I")) {
+                FacultyBuilder facultyBuilder = new FacultyBuilder();
+                modify(facultyBuilder);
+            }else if (choice.equals("Q")){
                 break;
             } else {
                 System.out.println("Please enter a valid option.");
@@ -169,52 +182,35 @@ public class AdminTextDriver {
     }
 
 
-//    private void deleteCourse(){
-//        Scanner scan = new Scanner(System.in);
-//        CourseBuilder courseBuilder = new CourseBuilder();
-//
-//        System.out.println("Please enter a 5 digit course ID");
-//        courseBuilder.ID(scan.nextInt());
-//
-//        Course course = courseBuilder.build();
-//        boolean success= admin.delete(course);
-//
-//        System.out.println("Course successfully deleted.");
-//    }
-//
-//    private void deleteStudent(){
-//        Scanner scan = new Scanner(System.in);
-//        StudentBuilder studentBuilder = new StudentBuilder();
-//
-//        System.out.println("Please enter a 5 digit course ID");
-//        studentBuilder.ID(scan.nextInt());
-//
-//        Student student = studentBuilder.build();
-//        boolean success= admin.delete(student);
-//
-//        if (success){
-//            System.out.println("Student successfully deleted.");
-//        } else{
-//            System.out.println("Unable to delete student. Please make sure student ID was entered correctly.");
-//        }
-//    }
-//
-//    private void deleteFaculty(){
-//        Scanner scan = new Scanner(System.in);
-//        FacultyBuilder facultyBuilder = new FacultyBuilder();
-//
-//        System.out.println("Please enter a 5 digit faculty ID");
-//        facultyBuilder.ID(scan.nextInt());
-//
-//        Faculty faculty = facultyBuilder.build();
-//        boolean success= admin.delete(faculty);
-//
-//        if (success){
-//            System.out.println("Faculty successfully deleted.");
-//        } else{
-//            System.out.println("Unable to delete faculty. Please make sure student ID was entered correctly.");
-//        }
-//    }
+    private void modify(Builder builder){
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("Please enter a 5 digit ID");
+        builder.ID(scan.nextInt());
+
+        Modifiable modifiable = builder.build();
+        String[] modifiableAttributes = modifiable.modifiableAttributes();
+
+        System.out.println("Please select the number associated with the attribute you would like the modify.");
+        for (int i = 0; i < modifiableAttributes.length; i++) {
+            System.out.print("•" + Integer.toString(i) + ": " + modifiableAttributes[i] + "\n");
+        }
+
+        int num = scan.nextInt();
+        String[] updateColumn = new String[]{modifiableAttributes[num]};
+
+        System.out.println("Please enter the value you would like to update the field with:");
+        String[] updateValue = new String[]{scan.next()};
+
+        boolean success = admin.modify(modifiable, updateColumn, updateValue);
+
+        if (success){
+            System.out.println("Modification successful");
+        } else{
+            System.out.println("Modification failed.");
+        }
+
+    }
 
 
 }

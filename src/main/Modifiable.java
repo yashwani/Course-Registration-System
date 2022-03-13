@@ -8,6 +8,8 @@ public interface Modifiable {
 
     public String[] listAttributes();
 
+    public String[] modifiableAttributes();
+
     public String primaryKey();
 
 }

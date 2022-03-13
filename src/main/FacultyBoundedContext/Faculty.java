@@ -89,6 +89,11 @@ public class Faculty implements Modifiable {
     }
 
     @Override
+    public String[] modifiableAttributes() {
+        return new String[0];
+    }
+
+    @Override
     public String primaryKey() {
         return String.valueOf(facultyId);
     }
