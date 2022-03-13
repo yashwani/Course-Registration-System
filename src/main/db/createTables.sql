@@ -91,7 +91,17 @@ INSERT INTO Previous_Courses(student_id, course_id) VALUES(10821, 10001);
 
 
 
-
+DROP TABLE IF EXISTS Passwords;
+CREATE TABLE Passwords(id int NOT NULL, password varchar(255) NOT NULL, position varchar(255) NOT NULL, PRIMARY KEY(id));
+INSERT INTO Passwords(id, password,position) VALUES(10821, 'password1','s');
+INSERT INTO Passwords(id, password,position) VALUES(10822, 'password2','s');
+INSERT INTO Passwords(id, password,position) VALUES(10823, 'password3','s');
+INSERT INTO Passwords(id, password,position) VALUES(10824, 'password4','s');
+INSERT INTO Passwords(id, password,position) VALUES(10825, 'password5','s');
+INSERT INTO Passwords(id, password,position) VALUES(20000, 'password6','f');
+INSERT INTO Passwords(id, password,position) VALUES(20001, 'password7','f');
+INSERT INTO Passwords(id, password,position) VALUES(20002, 'password8','f');
+INSERT INTO Passwords(id, password,position) VALUES(20003, 'password9','f');
 
 
 
