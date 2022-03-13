@@ -35,6 +35,22 @@ public class Student implements Modifiable {
 
     }
 
+    public Student(StudentBuilder builder){
+        try {
+            studentdb = new StudentDataAccessLayer(studentId);
+        } catch (SQLException e){
+            System.out.println("Error in student constructor");
+            System.out.println(e.getMessage());
+        }
+
+        this.studentId = builder.studentId;
+        this.lastName = builder.lastname;
+        this.firstName = builder.firstname;
+        this.enrollDate = builder.enrollDate;
+        this.isHold = builder.isHold;
+
+    }
+
     public RequestResponse addCourse(int courseID){
         StudentRegistration s = new StudentRegistration();
         RequestResponse r = s.addCourse(this, new Course(courseID));

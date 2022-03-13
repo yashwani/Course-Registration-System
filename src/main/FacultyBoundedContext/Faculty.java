@@ -26,6 +26,14 @@ public class Faculty implements Modifiable {
         facultydb = new FacultyDataAccessLayer(faculty_id);
     }
 
+    public Faculty(FacultyBuilder builder){
+        this.facultyId = builder.facultyId;
+        facultydb = new FacultyDataAccessLayer(this.facultyId);
+        this.lastName = builder.lastName;
+        this.firstName = builder.firstName;
+        this.email = builder.email;
+    }
+
     public RequestResponse assignGrade(int course_id, int student_id, String grade){
         RequestResponse requestResponse = new RequestResponse();
 
@@ -77,7 +85,7 @@ public class Faculty implements Modifiable {
 
     @Override
     public String[] listAttributes() {
-        return new String[]{String.valueOf(facultyId),lastName, firstName};
+        return new String[]{String.valueOf(facultyId),lastName, firstName, email};
     }
 
     @Override

@@ -32,6 +32,20 @@ public class Course implements Modifiable {
         this.courseId = courseId;
     }
 
+    public Course(CourseBuilder builder){
+        courseDataAccessLayer = new CourseDataAccessLayer(courseId);
+
+        this.courseId = builder.courseID;
+        this.course_name = builder.course_name;
+        this.isOpen = builder.isOpen;
+        this.instructor = builder.instructor;
+        this.instructor_permission = builder.instructor_permission;;
+        this.prereq1_id = builder.prereq1;
+        this.prereq2_id = builder.prereq2;
+        this.prereq3_id = builder.prereq3;
+
+    }
+
     public int getID(){
         return courseId;
     }

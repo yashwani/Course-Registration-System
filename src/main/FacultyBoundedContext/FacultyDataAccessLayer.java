@@ -50,7 +50,7 @@ public class FacultyDataAccessLayer extends DataAccessLayer implements Modifier 
 
     @Override
     public boolean createNew(Modifiable faculty) {
-        String[] insertColumn = new String[]{"faculty_id", "last_name", "first_name"};
+        String[] insertColumn = new String[]{"faculty_id", "last_name", "first_name","email"};
         String[] insertValue = faculty.listAttributes();
 
         return super.executeInsertQuery("faculty", insertColumn, insertValue);
