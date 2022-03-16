@@ -15,6 +15,11 @@ To Do:
 6. run the sql script to create and populate tables: mysql> source /......./src/main/db/createTables.sql
 7. In .../src/main/db/DatabaseConnection.java, line 13, change user and password strings to whatever your MySQL username and password are
 
+## Setting up mongoDB
+1. create a mongodb database called "REGIE"
+2. In /.../src/main/db/MongoDBConnection.java, add the correct address of the mongo (if local, then likely keep as is)
+
+
 ## SOLID Principles
 
 For the single responsibility principle, instead of listing out every single class and its responsibility, I will point out particular use case where I had to deliberately focus my attention on using SRP: when a student wants to register for a course. The Student class is only responsible for what a student can do - which restricts the student to initiating the request to add a course. Since the student cannot actually add a course by themselves, the classes handling registration are used in the registration bounded context (interactions happen thorugh the StudentRegistration class). The StudentRegistration class delegates registration out to appropriate classes. Since browsing courses is a single, relatively stable (in my opinion), piece of code, I didn't create a class for it and just included it in StudentRegistration. CourseAddDrop performs actually performs course modification for students including relevant checks. The actual interaction with the database, however, is delegated out to various data access layers, in particular, the StudentsCoursesDataAccessLayer. 

@@ -52,7 +52,7 @@ public class DataAccessLayer {
             PreparedStatement pst = conn.prepareStatement(stmt);
             row = pst.executeUpdate();
         } catch(SQLException e){
-            System.out.println("Error in connecting to database, or SQL Statement execution. ");
+            System.out.println("Warning: Potential error in connecting to database1234, or SQL Statement execution. ");
             result = false;
         }
 

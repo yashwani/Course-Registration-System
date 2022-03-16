@@ -1,8 +1,11 @@
 package main.CoursesBoundedContext;
+import com.mongodb.*;
 import main.Modifiable;
 import main.Modifier;
 import main.db.DataAccessLayer;
+import main.db.MongoDBConnection;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class CourseDataAccessLayer extends DataAccessLayer implements Modifier {
@@ -55,6 +58,12 @@ public class CourseDataAccessLayer extends DataAccessLayer implements Modifier {
         String[] insertColumn = new String[]{"course_id", "course_name", "isOpen", "instructor", "instructor_permission", "prereq1_id", "prereq2_id", "prereq3_id"};
         String[] insertValue = course.listAttributes();
 
+        String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
+        DBObject entry = new BasicDBObject("_id", timestamp)
+                .append("operation", "create course")
+                .append("id", course.primaryKey());
+        log(entry);
+
         return super.executeInsertQuery("courses", insertColumn, insertValue);
     }
 
@@ -62,6 +71,12 @@ public class CourseDataAccessLayer extends DataAccessLayer implements Modifier {
     public boolean delete(Modifiable course) {
         String[] keyName = new String[]{"course_id"};
         String[] keyID = new String[]{course.primaryKey()};
+
+        String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
+        DBObject entry = new BasicDBObject("_id", timestamp)
+                .append("operation", "delete course")
+                .append("id", course.primaryKey());
+        log(entry);
 
         return super.executeDeleteQuery("courses",keyName, keyID);
     }
@@ -71,6 +86,20 @@ public class CourseDataAccessLayer extends DataAccessLayer implements Modifier {
         String[] keyName = new String[]{"course_id"};
         String[] keyID = new String[]{course.primaryKey()};
 
+        String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
+        DBObject entry = new BasicDBObject("_id", timestamp)
+                .append("operation", "modify course")
+                .append("id", course.primaryKey());
+        log(entry);
+
         return super.executeUpdateQuery("courses",updateColumn, updateValue, keyName, keyID);
+    }
+
+    private void log(DBObject entry){
+        MongoDBConnection mongodb = MongoDBConnection.getInstance();
+        MongoClient mognoconn = mongodb.mongoClient;
+        DB database = mognoconn.getDB("REGIE");
+        DBCollection collection = database.getCollection("logging");
+        collection.insert(entry);
     }
 }

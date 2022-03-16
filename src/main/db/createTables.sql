@@ -28,17 +28,22 @@ INSERT INTO Courses (course_id, course_name, isOpen, instructor, instructor_perm
 
 
 
-DROP TABLE IF EXISTS Courses_Students;
-CREATE TABLE Courses_Students (course_id int NOT NULL, course_name varchar(255),
-student_id int NOT NULL, permission_recieved boolean NOT NULL DEFAULT 0 , student_status varchar(255) NOT NULL, PRIMARY KEY(course_id, student_id));
 
-INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10000, 'Cloud Computing', 10821, 'Enrolled');
-INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10000, 'Cloud Computing', 10823, 'Enrolled');
-INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10000, 'Cloud Computing', 10822, 'Enrolled');
-INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10000, 'Cloud Computing', 10824, 'Enrolled');
-INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10001, 'Cloud Computing', 10824, 'Enrolled');
-INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10002, 'Cloud Computing', 10824, 'Enrolled');
-INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10003, 'Cloud Computing', 10824, 'Enrolled');
+DROP TABLE IF EXISTS Courses_Students;
+CREATE TABLE Courses_Students (course_id int NOT NULL,
+                               student_id int NOT NULL, student_status varchar(255) NOT NULL, PRIMARY KEY(course_id, student_id));
+
+# DROP TABLE IF EXISTS Courses_Students;
+# CREATE TABLE Courses_Students (course_id int NOT NULL, course_name varchar(255),
+# student_id int NOT NULL, permission_recieved boolean NOT NULL DEFAULT 0 , student_status varchar(255) NOT NULL, PRIMARY KEY(course_id, student_id));
+
+# INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10000, 'Cloud Computing', 10821, 'Enrolled');
+# INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10000, 'Cloud Computing', 10823, 'Enrolled');
+# INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10000, 'Cloud Computing', 10822, 'Enrolled');
+# INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10000, 'Cloud Computing', 10824, 'Enrolled');
+# INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10001, 'Cloud Computing', 10824, 'Enrolled');
+# INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10002, 'Cloud Computing', 10824, 'Enrolled');
+# INSERT INTO Courses_Students(course_id, course_name, student_id, student_status) VALUES (10003, 'Cloud Computing', 10824, 'Enrolled');
 
 
 
@@ -93,15 +98,16 @@ INSERT INTO Previous_Courses(student_id, course_id) VALUES(10821, 10001);
 
 DROP TABLE IF EXISTS Passwords;
 CREATE TABLE Passwords(id int NOT NULL, password varchar(255) NOT NULL, position varchar(255) NOT NULL, PRIMARY KEY(id));
-INSERT INTO Passwords(id, password,position) VALUES(10821, 'password1','s');
-INSERT INTO Passwords(id, password,position) VALUES(10822, 'password2','s');
-INSERT INTO Passwords(id, password,position) VALUES(10823, 'password3','s');
-INSERT INTO Passwords(id, password,position) VALUES(10824, 'password4','s');
-INSERT INTO Passwords(id, password,position) VALUES(10825, 'password5','s');
-INSERT INTO Passwords(id, password,position) VALUES(20000, 'password6','f');
-INSERT INTO Passwords(id, password,position) VALUES(20001, 'password7','f');
-INSERT INTO Passwords(id, password,position) VALUES(20002, 'password8','f');
-INSERT INTO Passwords(id, password,position) VALUES(20003, 'password9','f');
+INSERT INTO Passwords(id, password,position) VALUES(10821, 'password','s');
+INSERT INTO Passwords(id, password,position) VALUES(10822, 'password','s');
+INSERT INTO Passwords(id, password,position) VALUES(10823, 'password','s');
+INSERT INTO Passwords(id, password,position) VALUES(10824, 'password','s');
+INSERT INTO Passwords(id, password,position) VALUES(10825, 'password','s');
+INSERT INTO Passwords(id, password,position) VALUES(20000, 'password','f');
+INSERT INTO Passwords(id, password,position) VALUES(20001, 'password','f');
+INSERT INTO Passwords(id, password,position) VALUES(20002, 'password','f');
+INSERT INTO Passwords(id, password,position) VALUES(20003, 'password','f');
+INSERT INTO Passwords(id, password,position) VALUES(30000, 'password','a');
 
 
 

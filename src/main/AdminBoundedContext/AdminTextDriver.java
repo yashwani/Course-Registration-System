@@ -91,14 +91,17 @@ public class AdminTextDriver {
         System.out.println("Please enter a 5 digit course ID:");
         courseBuilder.ID(scan.nextInt());
 
+        scan.nextLine();
         System.out.println("Enter the course name:");
-        courseBuilder.course_name("'" + scan.next() + "'");
+        courseBuilder.course_name("'" + scan.nextLine() + "'");
+
 
         System.out.println("Is the course open?: 0 if NO, 1 if YES");
         courseBuilder.isOpen(scan.nextInt());
 
+        scan.nextLine();
         System.out.println("Enter instructor name:");
-        courseBuilder.instructor("'" + scan.next() + "'");
+        courseBuilder.instructor("'" + scan.nextLine() + "'");
 
         System.out.println("Instructor permission required?: 0 if NO, 1 if YES ");
         courseBuilder.instructor_permission(scan.nextInt());

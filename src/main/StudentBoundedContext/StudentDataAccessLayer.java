@@ -1,9 +1,16 @@
 package main.StudentBoundedContext;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.MongoClient;
 import main.Modifiable;
 import main.Modifier;
 import main.db.DataAccessLayer;
+import main.db.MongoDBConnection;
+import com.mongodb.*;
+import main.db.MongoDBConnection;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class StudentDataAccessLayer extends DataAccessLayer implements Modifier {
@@ -23,9 +30,17 @@ public class StudentDataAccessLayer extends DataAccessLayer implements Modifier 
 
 
 
+
     public boolean createNew(Modifiable student){
         String[] insertColumn = new String[]{"student_id", "last_name", "first_name", "enroll_date","isHold"};
         String[] insertValue = student.listAttributes();
+
+        String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
+        DBObject entry = new BasicDBObject("_id", timestamp)
+                .append("operation", "create student")
+                .append("id", student.primaryKey());
+        log(entry);
+
 
         return super.executeInsertQuery("students", insertColumn, insertValue);
     }
@@ -35,6 +50,12 @@ public class StudentDataAccessLayer extends DataAccessLayer implements Modifier 
         String[] keyName = new String[]{"student_id"};
         String[] keyID = new String[]{student.primaryKey()};
 
+        String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
+        DBObject entry = new BasicDBObject("_id", timestamp)
+                .append("operation", "delete student")
+                .append("id", student.primaryKey());
+        log(entry);
+
         return super.executeDeleteQuery("students",keyName, keyID);
     }
 
@@ -42,6 +63,12 @@ public class StudentDataAccessLayer extends DataAccessLayer implements Modifier 
     public boolean update(Modifiable student, String[] updateColumn, String[] updateValue) {
         String[] keyName = new String[]{"student_id"};
         String[] keyID = new String[]{student.primaryKey()};
+
+        String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
+        DBObject entry = new BasicDBObject("_id", timestamp)
+                .append("operation", "modify student")
+                .append("id", student.primaryKey());
+        log(entry);
 
         return super.executeUpdateQuery("students",updateColumn, updateValue, keyName, keyID);
     }
@@ -81,6 +108,14 @@ public class StudentDataAccessLayer extends DataAccessLayer implements Modifier 
             return "Student not found.";
         }
         return result.get(0).get(0);
+    }
+
+    private void log(DBObject entry){
+        MongoDBConnection mongodb = MongoDBConnection.getInstance();
+        MongoClient mognoconn = mongodb.mongoClient;
+        DB database = mognoconn.getDB("REGIE");
+        DBCollection collection = database.getCollection("logging");
+        collection.insert(entry);
     }
 
 

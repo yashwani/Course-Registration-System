@@ -1,5 +1,7 @@
 package main.FacultyBoundedContext;
 
+import main.CoursesBoundedContext.Course;
+import main.StudentBoundedContext.Student;
 import main.db.DataAccessLayer;
 
 import java.util.ArrayList;
@@ -31,6 +33,12 @@ public class GradesDataAccessLayer extends DataAccessLayer {
         String[] updateValue = new String[]{"'" + grade +"'"};
 
         return super.executeUpdateQuery(tableName, updateColumn, updateValue,keyName, keyID);
+    }
+
+    public boolean addEntry(Student student, Course course){
+        String[] insertColumn = new String[]{"course_id", "student_id","grade"};
+        String[] columnValue = new String[]{String.valueOf(course.getID()), String.valueOf(student.getID()), "NULL"};
+        return super.executeInsertQuery(tableName,insertColumn,columnValue);
     }
 
     private boolean isValid(String grade){

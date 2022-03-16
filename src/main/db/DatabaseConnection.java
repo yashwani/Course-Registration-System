@@ -1,5 +1,6 @@
 package main.db;
 import java.sql.*;
+import java.util.logging.Level;
 
 public class DatabaseConnection {
     /**
@@ -10,6 +11,7 @@ public class DatabaseConnection {
 
     private DatabaseConnection(){
         try {
+            java.util.logging.Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF);
             dbConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/REGIE", "root", "");
         }
         catch (SQLException e) {

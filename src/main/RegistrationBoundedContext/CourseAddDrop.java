@@ -4,6 +4,7 @@ import main.AdminBoundedContext.FacultyCourseDataAccessLayer;
 import main.CoursesBoundedContext.Course;
 import main.CoursesBoundedContext.PrevCourseDataAccessLayer;
 import main.FacultyBoundedContext.FacultyDataAccessLayer;
+import main.FacultyBoundedContext.GradesDataAccessLayer;
 import main.StudentBoundedContext.Student;
 import main.StudentBoundedContext.StudentDataAccessLayer;
 
@@ -60,9 +61,11 @@ public class CourseAddDrop {
 
         if(resp.isSuccess()){
             resp.addReason("Course Registration Successful");
-            //implement adding course to student in database here
             StudentsCoursesDataAccessLayer sc = new StudentsCoursesDataAccessLayer();
             sc.addStudentToCourse(student,course);
+
+            GradesDataAccessLayer g = new GradesDataAccessLayer(student.getID(), course.getID());
+            g.addEntry(student, course);
 
         }
 
